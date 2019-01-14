@@ -1,0 +1,103 @@
+<etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+<div class="template" *ngIf="!showSpinner">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h2>Manpower Request Form </h2>
+      <ol class="breadcrumb">
+        <li (click)="addNewMRFRaise()"><i class="fa fa-floppy-o"></i> Save</li>
+        <li class="active" (click)="cancel()"><i class="fa fa-undo"></i> Cancel</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <div class="column">
+        <div class="input-container">
+          <label>Department</label>
+          <select [(ngModel)]="MRF.Project">
+              <option value="0">--Select Project--</option>
+              <option *ngFor="let project of projects" value={{project.id}} >
+                {{project.projectName}}
+              </option>
+            </select>
+        </div>
+        
+        <div class="input-container">
+            <label>Department HOD / Approver</label>
+            <select [(ngModel)]="MRF.ProjectMgr">
+              <option value="0">--Select HOD--</option>
+              <option *ngFor="let manager of managers" value={{manager.id}} [selected]="manager.id==MRF.ProjectMgr">
+                {{manager.name}}
+              </option>
+            </select>
+          </div>
+        <div class="input-container">
+          <label>Position</label>
+          <select [(ngModel)]="MRF.DesignationId">
+            <option value="0">--Select Position--</option>
+            <option *ngFor="let designation of designations" value={{designation.Id}} [selected]="designation.Id==MRF.DesignationId">
+              {{designation.Name}}
+            </option>
+          </select>
+        </div>
+
+        <div class="input-container">
+          <label>No. of Employees</label>
+          <input type="number" [(ngModel)]="MRF.NoOfEmployess">
+        </div>
+
+        <div class="input-container">
+          <label>Primary Skills</label>
+          <div class="angular2-multiselect">
+            <angular2-multiselect [data]="primarySkillsArray" [(ngModel)]="selectedPrimarySkills" [settings]="settings"
+            (onSelect)="onItemSelect($event, 1)" 
+            (onDeSelect)="OnItemDeSelect($event, 1)"
+            (onSelectAll)="onSelectAll($event, 1)"
+            (onDeSelectAll)="onDeSelectAll($event, 1)">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="input-container">
+          <label>Secondary Skills</label>
+          <div class="angular2-multiselect">
+            <angular2-multiselect [data]="secondarySkillsArray" [(ngModel)]="selectedSecondarySkills" [settings]="settings"
+            (onSelect)="onItemSelect($event, 1)" 
+            (onDeSelect)="OnItemDeSelect($event, 1)"
+            (onSelectAll)="onSelectAll($event, 1)"
+            (onDeSelectAll)="onDeSelectAll($event, 1)">
+            </angular2-multiselect>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="input-container">
+          <label>Offered Salary</label>
+          <input type="number" [(ngModel)]="MRF.OfferedSalary">
+        </div>
+        <div class="input-container">
+          <div>
+            <label>Position Requested Budgeted</label>
+            <input type="radio" name="PRB" [(ngModel)]="MRF.PRB" value="true">YES
+            <input type="radio" name="PRB" [(ngModel)]="MRF.PRB" value="false">NO
+          </div>
+        </div>
+        <div class="input-container">
+          <label>Remarks</label>
+          <textarea [(ngModel)]="MRF.Remarks"></textarea>
+        </div>
+
+        <div class="input-container">
+          <div>
+            <label>Is Approved</label>
+            <input type="radio" name="IsApproved" [(ngModel)]="MRF.IsApproved" value="true">YES
+            <input type="radio" name="IsApproved" [(ngModel)]="MRF.IsApproved" value="false">NO
+          </div>
+        </div>
+        <div class="input-container">
+          <label>Date</label>
+          <input type="date" [(ngModel)]="MRF.Date">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

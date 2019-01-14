@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-body">
+    <div id="table" class="table-editable">
+      <span class="table-add float-right mb-3 mr-2">
+        <a class="text-success" ><!-- (click)="add()"-->
+          <mdb-icon icon="plus" size="2x"></mdb-icon>
+        </a>
+      </span>
+      <table class="table table-bordered table-responsive-md table-striped text-center">
+        <tbody>
+          <tr>
+            <th class="text-center task-name">Tasks</th>
+            <th class="text-center" *ngFor="let item of header; let id = index">
+              {{item.name}}
+              <span class="wdate"> {{item.dDate | date: 'MM/dd/yyyy' }}</span>
+            </th>
+            <th class="text-center rtotal greyBox">Total</th>
+          </tr>
+          <tr *ngFor="let r of rowFields; let id = index">
+            <td class="text-left task-name" [ngClass]="(r.taskName === 'Total')?'greyBox':''">{{r.taskName}}</td>
+
+            <td *ngFor="let h of r.timesheetColumns; let id = index" [ngClass]="(h.taskId === rowFields.length)?'greyBox':''">
+              <div *ngIf="h.taskId < rowFields.length">
+                <input class="text-center" style="width: 30px; border:none;" type="text" (keyup)="changeValue(h.id, h.date, h.taskId, $event)"
+                  [(ngModel)]="h.hours">
+              </div>
+              <label *ngIf="h.taskId === rowFields.length">{{h.hours}}</label>
+            </td>
+
+            <td class="text-center greyBox">{{r.totalHours}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Editable table -->

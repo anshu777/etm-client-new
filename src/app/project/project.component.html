@@ -1,0 +1,17 @@
+
+<div id="wrapper">
+
+  <!-- Navigation Menu Get based on Role -->
+  <et-sidebar [menuItems]="menuItems"  [sidebarTitle]='sidebarTitle'></et-sidebar>
+  <!-- End Navigation Area -->
+
+  <!-- Content Area -->
+  <div id="page-wrapper">
+      <et-notification></et-notification>
+      <!-- Routed View -->
+      <router-outlet></router-outlet>
+
+  </div>
+  <!-- End Content Area -->
+
+</div>

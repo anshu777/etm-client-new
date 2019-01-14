@@ -1,0 +1,79 @@
+@import '../../content/css/colors';
+
+$corner-radius: 5px;
+
+.wrapper {
+	display: flex;
+	span {
+		color: $white;
+	}
+}
+
+.icon-panel {
+	padding: 20px 15px 20px 15px;
+	border-top-left-radius: $corner-radius;
+	border-bottom-left-radius: $corner-radius;
+	pp-icon {
+		cursor: default;
+	}
+}
+
+.icon-panel.success {
+	background-color: $green;
+}
+
+.icon-panel.error {
+	background-color: $red;
+}
+
+.icon-panel.warning {
+	background-color: $orange;
+}
+
+.icon-panel.information {
+	background-color: $blue;
+}
+
+.content-panel {
+	display: flex;
+	background-color: $gray-dark-2;
+	border-top-right-radius: $corner-radius;
+	border-bottom-right-radius: $corner-radius;
+}
+
+.close-icon {
+	display: inline-block;
+	cursor: pointer;
+	text-align: center;
+	padding: 10px;
+	width: 20px;
+	min-width: 20px;
+}
+
+.text-container {
+	/* This is 304px because that is how the mockup was */
+	width: 304px;
+}
+.title {
+	display: block;
+	font-weight: bold;
+	margin: 20px 20px 0 20px;
+}
+
+.message {
+	display: block;
+	margin: 0 20px 20px 20px;
+}
+
+.content-panel {
+	word-wrap: break-word;
+	a {
+		display: inline-block;
+		color: $white;
+		text-decoration: underline;
+	}
+	p {
+		display: inline-block;
+		margin: 0px 35px 0px 0px;
+	}
+}

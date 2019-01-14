@@ -1,0 +1,29 @@
+<etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+<div class="template" *ngIf="!showSpinner">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h2>{{title}} </h2>
+            <ol class="breadcrumb">
+                <li><i class="fa fa-dashboard"></i> Select Week
+                    <input type="date" name="week" [ngModel]="weekDate | date:'yyyy-MM-dd'" (change)="resetWeekDate($event)">
+                </li>
+                <li>Copy from last week</li>
+                <li>Calender Month View</li>
+            </ol>
+        </div>
+    </div><!-- /.row -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <button mat-flat-button (click)="saveTimesheet()">Save</button>
+            <button mat-flat-button (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <data-table #tableComponent [leftColumns]="taskColumns" [header]="header" [employeeId]="employeeId"
+                [(inputTimesheetRows)]="employeeTimesheet.timesheetRows">
+            </data-table>
+        </div>
+    </div>
+</div>

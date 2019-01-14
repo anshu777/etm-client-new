@@ -1,0 +1,16 @@
+table td {
+    width: 150px;
+    padding: 2px;
+    border: 1px solid gray;
+}
+
+table th {
+    border: 1px solid gray;
+}
+
+
+table {
+   
+    font-size: 13px;
+    border: 1px solid gray;
+}

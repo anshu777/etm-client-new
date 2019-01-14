@@ -1,0 +1,60 @@
+.input-container-section {
+    flex: 1 1;
+    padding: 0 10px 20px 20px;
+}
+.input-container-section span {
+    padding: 5px;
+}
+.input-container-section label {
+    width: 210px;
+}
+.input-container-section input, .input-container-section select {
+    width: 200px;
+}
+.input-container-section .status-active-padding {
+    padding-top: 5px;
+}
+.header-color {
+    font-weight: 400;
+    color: blue;
+    margin: 0;
+    padding: 0 15px 5px 0;
+    line-height: 30px;
+}
+.top-left-container {
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+.import-header-tips {
+    margin: 0;
+    font-weight: bold;
+}
+.import-tips {
+    margin: 0;
+    padding-left: 2px;
+    list-style-type: none;
+}
+.input-container {
+    white-space: nowrap;
+    padding-top: 15px;
+}
+.input-container input, .input-container select, .input-container textarea {
+    width: 225px;
+    margin-left: 20px;
+}
+.input-container label {
+    width: 100px;
+    padding: 5px 15px 0 0;
+}
+.notifications-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.angular2-multiselect { 
+    width: 250px;
+    position: flex;
+  }

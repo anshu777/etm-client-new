@@ -1,0 +1,47 @@
+<!-- <pp-spinner *ngIf="showSpinner" size="medium"></pp-spinner> -->
+<div class="input-container">
+    <label>Project Name</label>
+    <input type="text" [(ngModel)]="project.projectName">
+</div>
+<div class="input-container">
+    <label>Project Manager</label>
+    <select (change)="selectEmployeeItem($event.target.value)">
+        <option value="0">--Select Manager--</option>
+        <option *ngFor="let c of projectManagers" value={{c.id}}>
+            {{c.name}}
+        </option>
+    </select>
+</div>
+<div class="input-container">
+    <label>Client Name</label>
+    <select (change)="selectClientItem($event.target.value)">
+        <option value="0">--Select Client--</option>
+        <option *ngFor="let cl of clients" value={{cl.id}}>
+            {{cl.name}}
+        </option>
+    </select>
+
+</div>
+
+<div class="input-container">
+    <label>Start Date</label>
+    <input type="date" [(ngModel)]="project.startDate">
+</div>
+<div class="input-container">
+    <label>Comments</label>
+    <textarea id="comment" [(ngModel)]="project.comments"></textarea>
+</div>
+<div class="input-container">
+    <label>Primary Skills</label>
+    <div class="angular2-multiselect">
+        <angular2-multiselect [data]="primarySkillsArray" [ngModel]="selectedPrimarySkills">
+        </angular2-multiselect>
+    </div>
+</div>
+<div class="input-container">
+    <label>Secondary Skills</label>
+    <div class="angular2-multiselect">
+        <angular2-multiselect [data]="secondarySkillsArray" [ngModel]="selectedSecondarySkills">
+        </angular2-multiselect>
+    </div>
+</div>

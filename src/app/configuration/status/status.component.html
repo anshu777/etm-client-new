@@ -1,0 +1,62 @@
+<etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+<div class="template" *ngIf="!showSpinner">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h2>Add Employee Status </h2>
+      <ol class="breadcrumb">
+        <li (click)="addNewStatus()"><i class="fa fa-floppy-o"></i> Save</li>
+        <li class="active" (click)="cancel()"><i class="fa fa-undo"></i> Cancel</li>
+        <li class="active" *ngIf="isSelected && isSingleSelected" (click)="editRecrod()"><i class="fa fa-pencil-square"></i>
+          Edit</li>
+        <li class="active" *ngIf="isSelected && isSingleSelected" (click)="deleteRecord()"><i class="fa fa-trash"></i>
+          Delete</li>
+
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <div class="input-container">
+        <label>Status type</label>
+        <select [(ngModel)]="status.StatusTypeId">
+           <option [ngValue]="null" disabled [selected]="true">--Select status Type--</option>
+           <option *ngFor="let s of statustype" value="{{s.Id}}">{{s.Type}}</option>
+        </select>
+      </div>
+      <div class="input-container">
+        <label>Status value</label>
+        <input type="text" placeholder="--Select status--" [(ngModel)]="status.Name">
+      </div>
+    </div>
+    <div class="column">
+      <mat-table [dataSource]="employeeStatus" matSort>
+
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> <input type="checkbox" id="empAllCheck" (click)="selectAllRows()">
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <input type="checkbox" value="{{row.id}}" [checked]="row.Checked" (change)="row.Checked = !row.Checked" id="{{row.id}}"
+              (click)="selectRecord($event)">
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+        </ng-container>
+
+        
+
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.status}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+
+    </div>
+  </div>
+</div>

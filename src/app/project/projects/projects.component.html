@@ -1,0 +1,94 @@
+<etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+<div class="template" *ngIf="!showSpinner">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h2>{{title}} </h2>
+            <ol class="breadcrumb">
+                <li (click)="addProject()"><i class="fa fa-plus-square"></i> Add New</li>
+                <li class="active" *ngIf="isSelected && isSingleSelected" (click)="editRecrod()"><i class="fa fa-pencil-square"></i> Edit</li>
+                <li class="active" *ngIf="isSelected && isSingleSelected" (click)="deleteRecord()"><i class="fa fa-trash"></i> Delete</li>
+        
+            </ol>
+        </div>
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <mat-table [dataSource]="projects" matSort>
+
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> <input type="checkbox" id="empAllCheck" (click)="selectAllRows()">
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <input type="checkbox" value="{{row.Id}}" [checked]="row.Checked" (change)="row.Checked = !row.Checked" id="{{row.id}}"
+                      (click)="selectRecord($event)">
+                  </mat-cell>
+                </ng-container>
+        
+                <ng-container matColumnDef="projectName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> ProjectName </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.projectName}} </mat-cell>
+                </ng-container>
+        
+                <!-- Progress Column -->
+                <ng-container matColumnDef="projectManager">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> ProjectManager </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.projectManager}} </mat-cell>
+                </ng-container>
+        
+                <!-- Name Column -->
+                <ng-container matColumnDef="clientName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> ClientName </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.clientName}} </mat-cell>
+                </ng-container>
+        
+                <!-- Color Column [style.color]="row.color" -->
+                <ng-container matColumnDef="officeAddress">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> OfficeAddress </mat-header-cell>
+                  <mat-cell *matCellDef="let row" > {{row.officeAddress}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="startDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </mat-header-cell>
+                    <mat-cell *matCellDef="let row" > {{row.startDate | date: 'yyyy-MM-dd'}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="dueDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> DueDate </mat-header-cell>
+                    <mat-cell *matCellDef="let row" > {{row.dueDate | date: 'yyyy-MM-dd'}} </mat-cell>
+                  </ng-container>
+        
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                </mat-row>
+              </mat-table>
+        
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+        </div>
+    </div>
+</div>
+
+<pp-modal-window #projectComponent [visible]="showEditMode" [hideDismissal]="false" size="medium">
+  <pp-modal-window-title>
+    Add Project
+  </pp-modal-window-title>
+  <pp-modal-window-content>
+    <et-project-crud #projectCrud 
+      [project]="project" 
+      [clients]="clients" 
+      [projectManagers]="employees"
+      (clientItemIdChange)="setClient($event)"
+      (empItemIdChange)="setEmployee($event)"
+      (primarySkillsChange)="setPrimarySkills($event)"
+      (secondarySkillsChange)="setSecondarySkills($event)">
+    </et-project-crud>
+  </pp-modal-window-content>
+  <pp-modal-window-actions>
+    <button type="button" class="button-position" (click)="saveProject()">Save</button>
+    <button type="button" class="button-space" (click)="cancel()">Cancel</button>
+  </pp-modal-window-actions>
+</pp-modal-window>
+
+<!-- Close the Splash screen -->
+<script src="content/js/loading-bars.js"></script>

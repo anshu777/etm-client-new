@@ -1,0 +1,45 @@
+.input-container {
+  white-space: nowrap;
+  padding-top: 15px;
+  display: flex
+}
+
+.input-container input,
+.input-container select {
+  width: 225px;
+}
+
+.input-container label {
+  width: 100px;
+  padding: 5px 15px 0 0;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+  width: 50%;
+  padding: 0 50px 0 50px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.angular2-multiselect { 
+  width: 400px;
+}
+
+.align-items-center {
+  display: flex;
+}
+
+.align-items-center h4 {
+  padding-top: 3px;
+  padding-left: 5px;
+}

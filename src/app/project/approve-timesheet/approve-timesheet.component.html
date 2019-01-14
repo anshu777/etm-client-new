@@ -1,0 +1,56 @@
+<etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+<div class="template" *ngIf="!showSpinner">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h2>{{title}} </h2>
+      <ol class="breadcrumb">
+        <li (click)="showApprove()"><i class="fa fa-dashboard"></i> Approve & Lock</li>
+        <li (click)="showUnlock()"><i class="fa fa-pencil-square"></i>
+          Unlock for Edit</li>
+      </ol>
+    </div>
+  </div><!-- /.row -->
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+      <div class="alert-info" style="padding:10px;">
+        Timesheets are pending for approval!
+      </div>
+
+      <div *ngIf="setApprove">
+        <div class="input-container">
+          <label>Team</label>
+          <select (change)="setTeamId($event.target.value)">
+            <option value="0">--Select Team--</option>
+            <option *ngFor="let team of teams" value={{team.id}}>
+              {{team.name}}
+            </option>
+          </select>
+        </div>
+        <div class="input-container">
+          <label>Select Week</label>
+          <input type="date" name="week" [ngModel]="weekDate | date:'yyyy-MM-dd'" (change)="resetWeekDate($event)">
+        </div>
+        <div class="button">
+          <input type="button" title="Approve" (click)="approve()" value="Approve">
+        </div>
+      </div>
+
+      <div *ngIf="setUnlock">
+        <div class="input-container">
+          <label>Employee Id</label>
+          <input type="text" name="empId" [ngModel]="employeeId" />
+        </div>
+        <div class="input-container">
+          <label>Select Week</label>
+          <input type="date" name="week" [ngModel]="weekDate | date:'yyyy-MM-dd'" (change)="resetWeekDate($event)">
+        </div>
+        <div class="button">
+          <input type="button" title="Unlock" (click)="unlock()" value="Unlock">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

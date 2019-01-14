@@ -1,0 +1,21 @@
+<div *ngIf="showOverlay && showPopup" class="overlay" (mousedown)="close.emit()"></div>
+<ng-content select="pp-popup-content-wrapper"></ng-content>
+<div *ngIf="showPopup" class="popup-content-container" [class.right]="alignRight" [style.display]="arrowDirection === 'left' ? 'inline-flex' : null">
+	<div class="popup-content"
+		 [style.top]="arrowDirection === 'up' ? topOffset : null"
+		 [style.left]="arrowDirection === 'up' ? leftOffset : null"
+		 [style.right]="arrowDirection === 'up' ? rightOffset : null" >
+		<div class="popup-box {{size}}" [class.swap-arrow-side]="swapArrowSide">
+			<div *ngIf="arrowDirection === 'up'" class="popup-arrow-up" [ngStyle]="{ 'left': _arrowPosition }">&#9650;</div>
+			<div *ngIf="arrowDirection === 'down'" class="popup-arrow-down" [ngStyle]="{ 'left': _arrowPosition }">&#9660;</div>
+			<div *ngIf="arrowDirection === 'left'" class="popup-arrow-left">&#9650;</div>
+			<div *ngIf="arrowDirection === 'right'" class="popup-arrow-right">&#9660;</div>
+			<!-- popup content -->
+			<ng-content select="pp-popup-content"></ng-content>
+			<!-- popup actions -->
+			<div class="popup-actions">
+				<ng-content select="pp-popup-actions"></ng-content>
+			</div>
+		</div>
+	</div>
+</div>

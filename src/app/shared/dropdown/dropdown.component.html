@@ -1,0 +1,5 @@
+<select (change)="onSelect($event.target.value)" (ngModel)="singleSelectData">
+        <option *ngFor="let d of singleSelectData" value= {{d.id}}>
+           {{d.name}}
+        </option>
+</select>

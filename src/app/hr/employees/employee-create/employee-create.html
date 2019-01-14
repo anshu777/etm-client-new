@@ -1,0 +1,188 @@
+<etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+<div class="template" *ngIf="!showSpinner">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h2>Add Employee </h2>
+      <ol class="breadcrumb">
+        <li (click)="addNewEmployee()"><i class="fa fa-floppy-o"></i> Save</li>
+        <li class="active" (click)="cancel()"><i class="fa fa-undo"></i> Cancel</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <div class="column">
+        <div class="input-container">
+          <label>CompanyID</label>
+          <input type="text" [(ngModel)]="employee.BSIPLid">
+        </div>
+        <div class="input-container">
+          <label>Name</label>
+          <input type="text" [(ngModel)]="employee.Name">
+        </div>
+        <div class="input-container">
+          <label>Designation</label>
+          
+          <select [(ngModel)]="employee.DesignationId">
+            <option value="0">--Select Designation--</option>
+            <option *ngFor="let designation of designations" value={{designation.Id}} [selected]="designation.Id==employee.DesignationId">
+              {{designation.Name}}
+            </option>
+          </select>
+        </div>
+        <div class="input-container">
+            <label>Team</label>
+            <select [(ngModel)]="employee.TeamId">
+              <option value="0">--Select Team--</option>
+              <option *ngFor="let team of teams" value={{team.id}} [selected]="team.id==employee.TeamId">
+                {{team.name}}
+              </option>
+            </select>
+          </div>
+          <div class="input-container">
+            <label>Reporting Manager</label>
+            <select [(ngModel)]="employee.ReportingMgr">
+              <option value="0">--Select Manager--</option>
+              <option *ngFor="let manager of managers" value={{manager.id}} [selected]="manager.id==employee.ReportingMgr">
+                {{manager.name}}
+              </option>
+            </select>
+          </div>
+        <div class="input-container">
+          <label>Date Of Joining</label>
+          <input type="date" [(ngModel)]="employee.DateOfJoin">
+        </div>
+        <div class="input-container">
+          <label>Category</label>
+          <select name="category" [(ngModel)]="employee.categoryId" (change)="selectCategory($event.target.value)">
+            <option value="0">--Select Category--</option>
+            <option *ngFor="let category of categories" value={{category.Id}} [selected]="category.Id==employee.CategoryId">
+             {{category.Id}} {{category.Name}}
+            </option>
+          </select>
+        </div>
+        <div class="input-container">
+          <label>Client Status</label>
+          <select name="clientStatus" [(ngModel)]="employee.ProjectStatus">
+            <option value="0">--Select Client Status--</option>
+            <option value=1>Approved</option>
+            <option value=2>Shadow</option>
+          </select>
+        </div>
+        <div class="input-container">
+          <label>Jointing CTC</label>
+          <input type="number" [(ngModel)]="employee.JoiningCtc">
+        </div>
+        <div class="input-container">
+          <label>Status</label>
+          <!-- [ngModel]="employee.status" -->
+          <select name="empStatus" (change)="selectStatus($event.target.value)">
+            <option value="0">--Select Status--</option>
+            <option value="1">Confirmed</option>
+            <option value="2">Probation</option>
+            <option value="3">Resigned</option>
+            <option value="4">Absconding</option>
+            <!-- <option *ngFor="let team of employeeStatus" value={{team.id}}>
+              {{team.name}}
+            </option> -->
+          </select>
+        </div>
+        <div class="input-container" *ngIf="takeAction">
+          <label>Take Action</label>
+          <!-- [(ngModel)]="resignAction"  -->
+          <select name="actions" (change)="selectAction($event.target.value)">
+            <option value="0">--Select Action--</option>
+            <option value="1">New Resorce Hiring</option>
+            <option value="2">Resource Shuffling</option>
+            <option value="3">No Action</option>
+          </select>
+        </div>
+        <div class="input-container" *ngIf="actionHire">
+          <input id="0" type="radio" value="Yes" name="regAction" /> Yes
+          <input id="1" type="radio" value="No" name="regAction" /> No
+          <input id="2" type="radio" value="On Hold" name="regAction" /> On Hold
+        </div>
+
+      
+      
+        <div class="input-container">
+          <label>Previous Experience</label>
+          <input type="number" id="experience" [(ngModel)]="employee.ExperienceBeforeJoining">
+        </div>
+
+        <div class="input-container">
+          <label>Primary Skills</label>
+          <div class="angular2-multiselect">
+            <angular2-multiselect class="angular2-multiselect" [data]="primarySkillsArray" [(ngModel)]="selectedPrimarySkills" [settings]="settings"
+            (onSelect)="onItemSelect($event, 1)" 
+            (onDeSelect)="OnItemDeSelect($event, 1)"
+            (onSelectAll)="onSelectAll($event, 1)"
+            (onDeSelectAll)="onDeSelectAll($event, 1)">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="input-container">
+          <label>Secondary Skills</label>
+          <div class="angular2-multiselect">
+            <angular2-multiselect class="angular2-multiselect" [data]="secondarySkillsArray" [(ngModel)]="selectedSecondarySkills" [settings]="settings"
+            (onSelect)="onItemSelect($event, 1)" 
+            (onDeSelect)="OnItemDeSelect($event, 1)"
+            (onSelectAll)="onSelectAll($event, 1)"
+            (onDeSelectAll)="onDeSelectAll($event, 1)">
+            </angular2-multiselect>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="input-container">
+          <label>Aadhar Number</label>
+          <input type="text" [(ngModel)]="employee.Aadhar">
+        </div>
+        <div class="input-container">
+          <label>PAN Number</label>
+          <input type="text" [(ngModel)]="employee.PAN">
+        </div>
+        <div class="input-container">
+          <label>Bank Account</label>
+          <input type="text" [(ngModel)]="employee.BankAccAtJoining">
+        </div>
+        <div class="input-container">
+          <label>Salary Account</label>
+          <input type="text" [(ngModel)]="employee.SalaryAcc">
+        </div>
+        <div class="input-container">
+          <label>UAN Number</label>
+          <input type="text" [(ngModel)]="employee.UAN">
+        </div>
+        <div class="input-container">
+          <label>Contact Number</label>
+          <input type="text" [(ngModel)]="employee.ContactNo">
+        </div>
+        <div class="input-container">
+          <label>Alternate Number</label>
+          <input type="text" [(ngModel)]="employee.AltContactNo">
+        </div>
+        <div class="input-container">
+          <label>Permanent Address</label>
+          <input type="text" [(ngModel)]="employee.PermanentAddr">
+        </div>
+        <div class="input-container">
+          <label>Correspondence Address</label>
+          <input type="text" [(ngModel)]="employee.CorrespondenceAddr">
+        </div>
+        <div class="input-container">
+          <label>Email</label>
+          <input type="email" [(ngModel)]="employee.Email">
+        </div>
+        <div class="input-container">
+          <label>Alternate Email</label>
+          <input type="email" [(ngModel)]="employee.AltEmail">
+        </div>
+        <div class="input-container">
+          <label>Remarks</label>
+          <textarea [(ngModel)]="employee.Remarks"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

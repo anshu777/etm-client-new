@@ -1,0 +1,14 @@
+<!-- <pp-spinner *ngIf="showSpinner" size="medium"></pp-spinner> -->
+<div class="input-container">
+    <label>Task Name</label>
+    <input type="text" [(ngModel)]="task.name">
+</div>
+<div class="input-container">
+    <label>Applicable for</label>
+    <select (change)="selectTaskTypeItem($event.target.value)">
+        <option value="0">--Select Task Type--</option>
+        <option *ngFor="let c of taskTypes" value={{c.id}}>
+          {{c.name}}
+        </option>
+      </select>
+</div>

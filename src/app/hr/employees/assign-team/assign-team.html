@@ -1,0 +1,39 @@
+<etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+<div class="template" *ngIf="!showSpinner">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="align-items-center">
+        <h2>Employees </h2>
+        <h4> > Assign Team </h4>
+      </div>
+      <ol class="breadcrumb">
+        <li (click)="assignTeam()"><i class="fa fa-floppy-o"></i> Save</li>
+        <li class="active" (click)="cancel()"><i class="fa fa-times"></i> Cancel</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <div class="input-container">
+        <label>Team</label>
+        <select (change)="selectTeam($event.target.value)">
+          <option value="0">--Select Team--</option>
+          <option *ngFor="let team of teams" value={{team.id}}>
+            {{team.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="column">
+      <div class="input-container">
+        <label>Employees</label>
+        <div class="angular2-multiselect">
+          <angular2-multiselect [data]="employees" [(ngModel)]="selectedEmp" [settings]="settings">
+          </angular2-multiselect>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

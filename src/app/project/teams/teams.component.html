@@ -1,0 +1,82 @@
+<etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+<div class="template" *ngIf="!showSpinner">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h2>{{title}} </h2>
+            <ol class="breadcrumb">
+                <li (click)="addTeam()"><i class="fa fa-dashboard"></i> Add New</li>
+                <li class="active" (click) = "assignTasks()"><i class="fa fa-dashboard"></i> Assign Tasks</li>
+                <li class="active" *ngIf="isSingleSelected" (click) = "editRecrod()"><i class="fa fa-table"></i> Edit</li>
+                <li class="active" *ngIf="isSingleSelected" (click) = "deleteRecord()"><i class="fa fa-table"></i> Delete</li>
+            </ol>
+        </div>
+    </div><!-- /.row -->
+
+    <div class="row" *ngIf="isSelected">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline">
+                    <li class="active" (click) = "assignTeam()"><i class="fa fa-dashboard"></i> Assign Team</li>
+                    
+                </ul>
+            </div>
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <mat-table [dataSource]="teams" matSort>
+
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> <input type="checkbox" id="empAllCheck" (click)="selectAllRows()">
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <input type="checkbox" value="{{row.Id}}" [checked]="row.Checked" (change)="row.Checked = !row.Checked" id="{{row.id}}"
+                      (click)="selectRecord($event)">
+                  </mat-cell>
+                </ng-container>
+        
+                <ng-container matColumnDef="name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> TeamName </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+                </ng-container>
+        
+                <!-- Progress Column -->
+                <ng-container matColumnDef="setupDate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> SetupDate </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.setupDate}} </mat-cell>
+                </ng-container>
+        
+                <ng-container matColumnDef="projectName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> ProjectName </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.projectName}} </mat-cell>
+                  </ng-container>
+              
+        
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                </mat-row>
+              </mat-table>
+        
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>                                      
+    </div>
+</div>
+
+<pp-modal-window #teamCrudComponent [visible]="showEditMode" [hideDismissal]="false" size="medium">
+    <pp-modal-window-title>
+      Add Team
+    </pp-modal-window-title>
+    <pp-modal-window-content>
+      <et-teams-crud #teamCrud 
+        [team]="team"
+        [projects]="projects" 
+        (projItemIdChange)="setProjectId($event)">
+      </et-teams-crud>
+    </pp-modal-window-content>
+    <pp-modal-window-actions>
+      <button type="button" class="button-position" (click)="saveTeam()">Save</button>
+      <button type="button" class="button-space" (click)="cancel()">Cancel</button>
+    </pp-modal-window-actions>
+  </pp-modal-window>
+
+
+

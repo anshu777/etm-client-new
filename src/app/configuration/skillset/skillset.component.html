@@ -1,0 +1,56 @@
+<etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+<div class="template" *ngIf="!showSpinner">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h2>Add SkillSet </h2>
+      <ol class="breadcrumb">
+        <li (click)="addNewSkill()"><i class="fa fa-floppy-o"></i> Save</li>
+        <li class="active" (click)="cancel()"><i class="fa fa-undo"></i> Cancel</li>
+        <li class="active" *ngIf="isSelected && isSingleSelected" (click)="editRecrod()"><i class="fa fa-pencil-square"></i> Edit</li>
+        <li class="active" *ngIf="isSelected && isSingleSelected" (click)="deleteRecord()"><i class="fa fa-trash"></i> Delete</li>
+
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <div class="input-container">
+        <label>Skill Name</label>
+        <input type="text" name="status" [(ngModel)]="Skset.name" />
+      </div>
+      <div class="input-container" >
+          <input id="1" type="radio" value="1" name="skillType" [(ngModel)]="Skset.isPrimary" /> Primary
+          <input id="2" type="radio" value="2" name="skillType" [(ngModel)]="Skset.isPrimary" /> Secondary
+        </div>
+    </div>
+    <div class="column">
+      <mat-table [dataSource]="skillSet" matSort>
+
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> <input type="checkbox" id="empAllCheck" (click)="selectAllRows()">
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <input type="checkbox" value="{{row.Id}}" [checked]="row.Checked" (change)="row.Checked = !row.Checked" id="{{row.id}}"
+              (click)="selectRecord($event)">
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.Name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="primary">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Primary </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.IsPrimary}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </div>
+</div>

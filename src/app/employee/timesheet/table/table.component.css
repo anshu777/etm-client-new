@@ -1,0 +1,15 @@
+.greyBox{
+    background-color: #ccc;
+}
+
+.task-name{
+    width: 250px;
+}
+
+.wdate {
+    padding-top:10px;
+    font-size: 12px;
+}
+.rtotal {
+    width: 90px;
+}

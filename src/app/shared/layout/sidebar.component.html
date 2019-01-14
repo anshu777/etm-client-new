@@ -1,0 +1,49 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <!-- navbar-header -->
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">{{heading}}</a>
+    </div>
+    <!-- /.navbar-header -->
+
+    <!-- navbar-top-links -->
+    <ul class="nav navbar-top-links navbar-right">
+        <!-- dropdown user icon -->
+        <li class="dropdown" (click)="logout()">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-user fa-fw"></i> 
+                <!-- <i class="fa fa-caret-down"></i> -->
+            </a>
+            <!-- dropdown-user -->
+            <ul class="dropdown-menu dropdown-user">
+                <li>
+                    <a href="#" target="_blank">
+                        <div class="text-center small"  (click)="logout()">
+                            <i class="fa fa-user fa-fw"></i> <span class="text-info"><strong>Logout</strong></span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown user icon -->
+    </ul>
+    <!-- /.navbar-top-links -->
+
+    <!-- navbar-static-side -->
+    <div class="navbar-default sidebar" role="navigation">
+        <!-- sidebar-collapse -->
+        <div class="sidebar-nav navbar-collapse">
+           <span class="sidebar-title"> {{sidebarTitle}} </span>
+            <ul class="nav navbar-nav">
+                <li *ngFor="let m of menuItems">
+                    <a routerLink="{{m.link}}" routerLinkActive="active">
+                        <i class="{{m.iconName}}"></i>
+                        <span class="nav-label">{{m.linkText}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+</nav>

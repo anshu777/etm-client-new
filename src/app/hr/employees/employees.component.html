@@ -1,0 +1,75 @@
+<etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+
+<div class="template" *ngIf="!showSpinner">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h2>{{title}} </h2>
+      <ol class="breadcrumb">
+        <li (click)="addNewEmployee()"><i class="fa fa-plus-square"></i> Add New Employee</li>
+        <li (click)="assignTeam()"class="active"><i class="fa fa-user-plus"></i> Assign Team</li>
+        <li class="active" *ngIf="isSelected && isSingleSelected" (click)="editRecrod()"><i class="fa fa-pencil-square"></i> Edit</li>
+        <li class="active" *ngIf="isSelected && isSingleSelected" (click)="deleteRecord()"><i class="fa fa-trash"></i> Delete</li>
+      </ol>
+    </div>
+  </div><!-- /.row -->
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+      <mat-table [dataSource]="employees" matSort>
+
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> <input type="checkbox" id="empAllCheck" (click)="selectAllRows()">
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <input type="checkbox" value="{{row.Id}}" [checked]="row.Checked" (change)="row.Checked = !row.Checked" id="{{row.id}}"
+              (click)="selectRecord($event)">
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.Name}} </mat-cell>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="designation">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Designation </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.Designation}} </mat-cell>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="category">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.Category}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="projectstatus">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Project Status </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.ProjectBillingStatusName}} </mat-cell>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+          <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.StatusName}} </mat-cell>
+        </ng-container>
+
+         <!-- Color Column -->
+         <ng-container matColumnDef="team">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Team </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.TeamName}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+<div class="template" *ngIf="!showSpinner">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h2>{{title}} </h2>
+            <ol class="breadcrumb">
+                <li (click)="addTask()"><i class="fa fa-dashboard"></i> Add New</li>
+                <li class="active" *ngIf="isSelected && isSingleSelected" (click)="editRecrod()"><i class="fa fa-pencil-square"></i> Edit</li>
+                <li class="active" *ngIf="isSelected && isSingleSelected" (click)="deleteRecord()"><i class="fa fa-trash"></i> Delete</li>
+        
+            </ol>
+        </div>
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+            <mat-table [dataSource]="tasks" matSort>
+
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> <input type="checkbox" id="empAllCheck" (click)="selectAllRows()">
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <input type="checkbox" value="{{row.id}}" [checked]="row.Checked" (change)="row.Checked = !row.Checked" id="{{row.id}}"
+                      (click)="selectRecord($event)">
+                  </mat-cell>
+                </ng-container>
+        
+                <ng-container matColumnDef="name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> TaskName </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+                </ng-container>
+        
+                <!-- Progress Column -->
+                <ng-container matColumnDef="createdBy">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> CreatedBy </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.createdBy}} </mat-cell>
+                </ng-container>
+        
+                <!-- Name Column -->
+                <ng-container matColumnDef="createdDate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> CreatedDate </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.createdDate | date: 'yyyy-MM-dd'}} </mat-cell>
+                </ng-container>
+        
+              
+        
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                </mat-row>
+              </mat-table>
+        
+              <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+
+
+
+        </div>
+    </div>
+</div>
+
+<pp-modal-window #taskCrudComponent [visible]="showEditMode" [hideDismissal]="false" size="medium">
+    <pp-modal-window-title>
+      Add Task
+    </pp-modal-window-title>
+    <pp-modal-window-content>
+      <et-task-crud #taskCrud 
+        [task]="task"
+        [taskTypes]="taskTypes" 
+        (selectTaskTypeItem)="setTaskTypeId($event)">
+      </et-task-crud>
+    </pp-modal-window-content>
+    <pp-modal-window-actions>
+      <button type="button" class="button-position" (click)="saveTask()">Save</button>
+      <button type="button" class="button-space" (click)="cancel()">Cancel</button>
+    </pp-modal-window-actions>
+  </pp-modal-window>
+
+<!-- Close the Splash screen -->
+<script src="content/js/loading-bars.js"></script>

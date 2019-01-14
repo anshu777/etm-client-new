@@ -1,0 +1,69 @@
+{
+  "totalEmployees": 42,
+  "totalOffices": 7,
+  "totalPositions": 30,
+  "employeesPerOffice": [
+    {
+      "key": "Analysis",
+      "value": 7
+    },
+    {
+      "key": "Coding",
+      "value": 9
+    },
+    {
+      "key": "Bug Fixing",
+      "value": 7
+    },
+    {
+      "key": "Sprint Meetings",
+      "value": 11
+    },
+    {
+      "key": "Training",
+      "value": 2
+    },
+    {
+      "key": "Others",
+      "value": 2
+    },
+    {
+      "key": "Leave",
+      "value": 4
+    }
+  ],
+  "employeesPerYear": [
+    {
+      "key": 2009,
+      "value": 9
+    },
+    {
+      "key": 2010,
+      "value": 16
+    },
+    {
+      "key": 2011,
+      "value": 23
+    },
+    {
+      "key": 2012,
+      "value": 31
+    },
+    {
+      "key": 2013,
+      "value": 37
+    },
+    {
+      "key": 2014,
+      "value": 39
+    },
+    {
+      "key": 2015,
+      "value": 41
+    },
+    {
+      "key": 2016,
+      "value": 42
+    }
+  ]
+}

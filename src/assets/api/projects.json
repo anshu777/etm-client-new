@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "projectName": "Powerplan",
+        "projectManager": "",
+        "clientName": "Powerplan",
+        "officeAddress": "Atlanta",
+        "startDate": "1-10-2015",
+        "dueDate": "1-10-2018"
+    },
+    {
+        "id": 2,
+        "projectName": "GHX",
+        "projectManager": "",
+        "clientName": "GHX",
+        "officeAddress": "US",
+        "startDate": "1-10-2015",
+        "dueDate": "1-10-2025"
+    },
+    {
+        "id": 3,
+        "projectName": "SRS",
+        "projectManager": "",
+        "clientName": "SRS",
+        "officeAddress": "US",
+        "startDate": "1-10-2015",
+        "dueDate": "1-10-2025"
+    }
+]

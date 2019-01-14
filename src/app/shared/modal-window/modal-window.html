@@ -1,0 +1,76 @@
+<div *ngIf="_visible">
+	<div class="overlay"></div>
+
+	<div class="dialog {{!width ? size : ''}}" [style.height]="height" [style.width]="width">
+
+		<div *ngIf="!hideDismissal" class="close">
+			<pp-popup [showPopup]="showClosePopup" size="content" leftOffset="-29px">
+				<pp-popup-content-wrapper>
+					<button class="close-icon" (click)="onClose()">
+						<pp-icon svgIcon="16/x" color="darkgrey2"></pp-icon>
+					</button>
+				</pp-popup-content-wrapper>
+				<pp-popup-content>
+					<p>Your information will be discarded.</p>
+					<p>Are you sure?</p>
+				</pp-popup-content>
+				<pp-popup-actions>
+					<div class="popup-actions">
+						<pp-button color="primary" alternativeStyle="red"  label="DISCARD" (click)="onDiscard()">
+						</pp-button>
+						<pp-button
+							color="secondary"
+							alternativeStyle="red"
+							class="button-space"
+							label="CANCEL"
+							(click)="hideClosePopup()">
+						</pp-button>
+					</div>
+				</pp-popup-actions>
+			</pp-popup>
+		</div>
+
+		<div class="dialog-content">
+
+			<!-- title of the dialog -->
+			<h1 class="dialog-content-title">
+				<ng-content select="pp-modal-window-title"></ng-content>
+			</h1>
+
+			<!-- dialog content -->
+			<ng-content></ng-content>
+			<div [ngClass]="{styleType: true, 'full-content-body-height': fullContentBodyHeight}" class="dialog-content-body">
+				<ng-content select="pp-modal-window-content"></ng-content>
+			</div>
+
+			<!-- dialog actions -->
+			<div class="modal-window-actions" *ngIf="isModalActionsAvailable">
+				<ng-content select="pp-modal-window-actions"></ng-content>
+				<pp-button *ngIf="showSubmit" color="primary" label="Submit" (click)="emitSubmitEvent()"> </pp-button>
+				<div class="cancel">
+					<div class="cancel-popup">
+						<pp-popup [showPopup]="showCancel && showCancelPopup" arrowDirection="down">
+							<pp-popup-content>
+								<p>Your information will be discarded.</p>
+								<p>Are you sure?</p>
+							</pp-popup-content>
+							<pp-popup-actions>
+								<pp-button color="primary" alternativeStyle="red" label="DISCARD" (click)="onDiscard()">
+								</pp-button>
+								<pp-button
+									color="secondary"
+									alternativeStyle="red"
+									class="button-space"
+									label="CANCEL"
+									(click)="hideCancelPopup()">
+								</pp-button>
+							</pp-popup-actions>
+						</pp-popup>
+					</div>
+				</div>
+				<pp-button *ngIf="showCancel" color="secondary" label="CANCEL" (click)="onCancel()"> </pp-button>
+			</div>
+
+		</div>
+	</div>
+</div>

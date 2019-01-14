@@ -1,0 +1,116 @@
+<div class="input-container">
+    <label>Report Based on</label>
+
+    <select name="reportKey" (change)="selectKey($event.target.value)">
+        <option value="0">--Select Report--</option>
+        <option value="1">Project</option>
+        <option value="2">Technology</option>
+        <option value="4">Designation</option>
+        <!-- <option *ngFor="let team of reportKeys" value={{team.id}}>
+            {{team.name}}
+          </option> -->
+    </select>
+</div>
+
+<etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+
+<div id="report" *ngIf="showProjectReport && !showSpinner">
+    <table>
+        <tr>
+            <th>Project</th>
+            <th>Category</th>
+            <th>Exp Yrs</th>
+            <th style="width:200px">Name of Employee</th>
+            <th style="width:250px">Title</th>
+            <th>Start Date</th>
+            <th>Team</th>
+            <th>Technology</th>
+            <th>Comments</th>
+            <th>Status</th>
+        </tr>
+        <tr id="hctr" *ngFor="let emp of employees">
+            <td>{{emp.ProjectName}}</td>
+            <td>{{emp.Category}}</td>
+            <td>1</td>
+            <td>{{emp.Name}}</td>
+            <td>{{emp.Designation}}</td>
+            <td>{{emp.DateOfJoin | date: 'dd/MM/yyyy'}}</td>
+            <td>{{emp.TeamName}}</td>
+            <td>{{emp.TechnologyName}}</td>
+            <td>{{emp.Remarks}}</td>
+            <td>{{emp.ProjectBillingStatusName}}</td>
+        </tr>
+    </table>
+</div>
+
+<div id="report" *ngIf="showTechSummaryReport && !showSpinner">
+    <table>
+        <tr>
+            <th>Technology</th>
+            <th>Approved</th>
+            <th>Shadow</th>
+            <th>Total</th>
+        </tr>
+        <tr id="hctr" *ngFor="let emp of techSummaryArray">
+            <td>{{emp.Technology}}</td>
+            <td>{{emp.Approved}}</td>
+            <td>{{emp.Shadow}}</td>
+            <td>{{emp.Total}}</td>
+        </tr>
+    </table>
+
+    <table style="padding-top:30px;">
+        <thead>
+
+            <th>Project</th>
+            <th>Category</th>
+            <th>Exp Yrs</th>
+            <th style="width:200px">Name of Employee</th>
+            <th style="width:250px">Title</th>
+            <th>Start Date</th>
+            <th>Team</th>
+            <th>Comments</th>
+            <th>Status</th>
+        </thead>
+        <tbody *ngFor="let ta of techDetailsArray">
+            <th>Technology</th>
+            <th colspan="9">{{ta.name}}</th>
+            <tr id="hctr" *ngFor="let emp of ta.employee">
+                <td>{{emp.ProjectName}}</td>
+                <td>{{emp.Category}}</td>
+                <td>1</td>
+                <td>{{emp.Name}}</td>
+                <td>{{emp.Designation}}</td>
+                <td>{{emp.DateOfJoin | date: 'dd/MM/yyyy'}}</td>
+                <td>{{emp.TeamName}}</td>
+                <td>{{emp.Remarks}}</td>
+                <td>{{emp.ProjectBillingStatusName}}</td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+<div id="report" *ngIf="showDesignationReport && !showSpinner">
+    <table style="padding-top:30px;">
+        <thead>
+            <th>Category</th>
+            <th>Designation</th>
+            <th>Approved</th>
+            <th>Shadow</th>
+            <th>Total</th>
+        </thead>
+        <tbody *ngFor="let ta of designationDetailArray">
+           
+            <th colspan="9">{{ta.Role}}</th>
+            <tr id="hctr" *ngFor="let emp of ta.DesignationStatusDto">
+                <td></td>
+                <td>{{emp.EmployeeDesignation}}</td>
+                <td>{{emp.Approved}}</td>
+                <td>{{emp.Shadow}}</td>
+                <td>{{emp.Total}}</td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>

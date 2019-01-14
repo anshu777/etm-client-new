@@ -1,0 +1,119 @@
+@import '../../content/css/colors';
+
+.icon-container {
+	position: relative;
+	display: inline-block;
+}
+
+.icon-container .transparency {
+	z-index: 10;
+	position: absolute;
+	background-color: transparent;
+	top: 0;
+	left: 0;
+}
+
+.m-icon {
+	fill: currentColor;
+	display: inline-block;
+	background-repeat: no-repeat;
+}
+
+.m-icon-white {
+	fill: $white;
+}
+
+.m-icon-lightgrey {
+	fill: $gray-light;
+}
+
+.m-icon-lightgrey2 {
+	fill: $gray-light-2;
+}
+
+.m-icon-lightgrey3 {
+	fill: $gray-light-3;
+}
+
+.m-icon-lightgrey4 {
+	fill: $gray-light-4;
+}
+
+.m-icon-darkgrey {
+	fill: $gray-medium;
+}
+
+.m-icon-darkgrey2 {
+	fill: $gray-dark;
+}
+
+.m-icon-darkgrey3 {
+	fill: $gray-dark-3;;
+}
+
+.m-icon-blue {
+	fill: $blue;
+}
+
+.m-icon-darkblue {
+	fill: $blue-dark;
+}
+
+.m-icon-green {
+	fill: $green;
+}
+
+.m-icon-red {
+	fill: $red;
+}
+
+.m-icon-orange {
+	fill: $orange;
+}
+
+.m-icon-xxsmall {
+	width: 10px;
+	height: 10px;
+}
+
+.m-icon-xsmall {
+	max-width: 12px;
+	width: 12px;
+	max-height: 12px;
+	height: 12px;
+}
+
+.m-icon-small {
+	width: 16px;
+	height: 16px;
+}
+
+.m-icon-medium {
+	width: 24px;
+	height: 24px;
+}
+
+.m-icon-medium-2 {
+	width: 26px;
+	height: 26px;
+}
+
+.m-icon-medium-3 {
+	width: 30px;
+	height: 30px;
+}
+
+.m-icon-large {
+	width: 32px;
+	height: 32px;
+}
+
+.m-icon-xlarge {
+	width: 48px;
+	height: 48px;
+}
+
+.m-icon-xxlarge {
+	width: 96px;
+	height: 96px;
+}

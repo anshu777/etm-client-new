@@ -1,0 +1,44 @@
+<div class="template">
+  <div class="row">
+    <div class="column">
+      <div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+         <label class="heading-center-20">Task vs Time</label>
+         <ul class="list-inline">
+           <li>
+              Month <et-dropdown [singleSelectData]="months" (onSelectItem)="onSelectMonth($event)"></et-dropdown>
+           </li>
+           <li>
+              Year <et-dropdown [singleSelectData]="years" (onSelectItem)="onSelectYear($event)"></et-dropdown>
+           </li>
+           <li>
+              Team <et-dropdown [singleSelectData]="teams" (onSelectItem)="onSelectTeam($event)"></et-dropdown>
+           </li>
+           <li>
+             <input type="button" value="Report" (click)="taskTimeReport()"/>
+           </li>
+         </ul>
+        
+         <etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+          <div class="panel-body" *ngIf="!showSpinner">
+            <nvd3 [options]="pieChartOptions" [data]="pieChartData"></nvd3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <label class="heading-center-20">Effort Variance - Expected vs Actual</label>
+            <label>[(Actual effort - Planned Effort)/Planned effort] * 100</label>
+        </div>
+        <etm-spinner [showSpinner]="showSpinner1"></etm-spinner>
+        <div class="panel-body">
+          <nvd3 [options]="lineChartOptions" [data]="lineChartData"></nvd3>
+      </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

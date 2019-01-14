@@ -1,0 +1,37 @@
+<etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+<div class="template" *ngIf="!showSpinner">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h2>Add Approver </h2>
+      <ol class="breadcrumb">
+        <li (click)="save()"><i class="fa fa-floppy-o"></i> Save</li>
+        <li class="active" (click)="cancel()"><i class="fa fa-undo"></i> Cancel</li>
+        <!-- <li class="active" *ngIf="isSelected && isSingleSelected" (click)="editRecrod()"><i class="fa fa-pencil-square"></i>
+          Edit</li>
+        <li class="active" *ngIf="isSelected && isSingleSelected" (click)="deleteRecord()"><i class="fa fa-trash"></i>
+          Delete</li> -->
+
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <div class="input-container">
+        <label>Approver Name</label>
+        <select (change)="selectApprover($event.target.value)">
+            <option value="0">--Select Approver--</option>
+            <option *ngFor="let c of managers" value={{c.Id}}>
+                {{c.Name}}
+            </option>
+        </select>
+      </div>
+      <div class="input-container">
+        <input id="1" type="checkbox" value="timesheet" name="timesheet" /> Timesheet
+        <input id="2" type="checkbox" value="mrf" name="mrf" /> MRF
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Timesheet AutoLock after 2 days of week complete -->
