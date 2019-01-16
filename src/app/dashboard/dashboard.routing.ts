@@ -11,9 +11,9 @@ const dashboardRoutes: Routes = [
         component: DashboardComponent,
         canActivate: [AuthGuard],
         data: { roles: ['Admin'] },
-        resolve: {
-            dashboard: DashboardResolve
-        }
+        //  resolve: {
+        //      dashboard: DashboardResolve
+        //  }
     },
     {
         path: 'orgchart',

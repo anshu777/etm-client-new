@@ -12,6 +12,14 @@
   <div class="row">
     <div>
       <div class="column">
+
+          <div class="input-container">
+              <div>
+               
+                <input type="radio" name="NewRequest" [(ngModel)]="MRF.NewRequest" value="true">New Request
+                <input type="radio" name="NewRequest" [(ngModel)]="MRF.NewRequest" value="false">Backfill
+              </div>
+            </div>
         <div class="input-container">
           <label>Department</label>
           <select [(ngModel)]="MRF.Project">
@@ -45,7 +53,24 @@
           <label>No. of Employees</label>
           <input type="number" [(ngModel)]="MRF.NoOfEmployess">
         </div>
+        <div class="input-container">
+            <label>Experience Required</label>
+            <input type="number" id="experience" [(ngModel)]="MRF.YearsOfExp">
+        </div>
+        <div class="input-container">
+            <div>
+              <label>Location</label>
+              <input type="radio" name="Location" [(ngModel)]="MRF.Location" value="All India" (change) ="resetIsCitySelected()">All India
+              <input type="radio" name="Location" [(ngModel)]="MRF.Location" (change) = "setIsCitySelected()">City
+            </div>
+          </div>
+          <div class="input-container" *ngIf="IsCitySelected">
+              <label></label>
+              <input type="text" [(ngModel)]="MRF.Location" placeholder="enter city">
+            </div>
+      </div>
 
+        <div class="column">
         <div class="input-container">
           <label>Primary Skills</label>
           <div class="angular2-multiselect">
@@ -68,8 +93,8 @@
             </angular2-multiselect>
           </div>
         </div>
-      </div>
-      <div class="column">
+      
+      
         <div class="input-container">
           <label>Offered Salary</label>
           <input type="number" [(ngModel)]="MRF.OfferedSalary">

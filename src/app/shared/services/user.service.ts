@@ -6,9 +6,10 @@ import 'rxjs/add/operator/map';
 import { User } from './user.model';
 import { Router } from '@angular/router';
 
+
 @Injectable()
 export class UserService {
-    readonly rootUrl = 'http://localhost/etmapi';
+    readonly rootUrl = 'http://localhost:8080/etmapi';
     constructor(private router: Router, private http: HttpClient) { }
 
     registerUser(user: User, roles: string[]) {

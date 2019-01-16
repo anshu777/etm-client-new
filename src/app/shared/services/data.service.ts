@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class DataService {
-    private apiUrl = 'http://localhost/etmapi/api/';    // URL to web API
+    private apiUrl = 'http://localhost:8080/etmapi/api/';    // URL to web API
 
     constructor(private http: Http) { }
 

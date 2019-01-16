@@ -25,6 +25,7 @@ export class RaiseMrfComponent implements OnInit {
     settings = {};
     private showSpinner: Boolean = false;
     private managers: any[];
+    private IsCitySelected: boolean = false;
     constructor(private router: Router, private activatedRoute: ActivatedRoute, private dataService: DataService) {
     }
 
@@ -69,6 +70,13 @@ export class RaiseMrfComponent implements OnInit {
             .subscribe(
                 this.router.navigate['employees']
             );
+    }
+
+    setIsCitySelected(){
+        this.IsCitySelected = true;
+    }
+    resetIsCitySelected(){
+        this.IsCitySelected = false;
     }
 
     getEmpListByDesignationId(id: number) {

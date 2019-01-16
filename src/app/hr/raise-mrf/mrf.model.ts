@@ -9,6 +9,9 @@ export class MRF {
     IsApproved: boolean;
     Date: Date;
     skillsId: number[];
+    NewRequest: boolean;
+    YearsOfExp: number;
+    Location: string;
 
     constructor() {
         this.Project = 0;
@@ -21,5 +24,8 @@ export class MRF {
         this.IsApproved = null;
         this.Date = null;
         this.skillsId = [];
+        this.NewRequest = null;
+        this.YearsOfExp = 0;
+        this.Location = '';
     }
 }
