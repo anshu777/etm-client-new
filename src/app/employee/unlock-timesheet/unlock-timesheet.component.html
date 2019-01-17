@@ -1,0 +1,39 @@
+<etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+<div class="template" *ngIf="!showSpinner">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h2>{{title}} </h2>
+      <ol class="breadcrumb">
+          <li (click)="saveRequest()"><i class="fa fa-floppy-o"></i> Request</li>
+          <li class="active" (click)="cancel()"><i class="fa fa-undo"></i> Cancel</li>
+        </ol>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <div class="column">
+        <div class="input-container">
+          <label> Project Manager : </label>
+          <select [(ngModel)]="prjmngrId" >
+            <option value="0">--Select project manager--</option>
+            <option *ngFor="let manager of managers" value="{{manager.id}}">{{manager.name}}</option>
+          </select>
+        </div>
+
+        <div class="input-container">
+          <label>Reason</label>
+          <select  [(ngModel)]="reason">
+              <option value="0" selected>--Select Reason--</option>
+              <option value="1">Forgot</option>
+              <option value="2">others</option>
+            </select>
+        </div>
+
+        <div class="input-container" *ngIf="reason==2">
+            <input type="text" placeholder="write your reason here" [(ngModel)]="reasontext">
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
