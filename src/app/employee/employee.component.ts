@@ -12,10 +12,11 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() {
     this.menuItems = [
-      { 'link': 'emp/dashboard', 'iconName': 'fa fa-table', 'linkText': 'Dashboard' },
-      { 'link': 'emp/timesheet', 'iconName': 'fa fa-table', 'linkText': 'Timesheet' },
-      { 'link': 'emp/dashboard', 'iconName': 'fa fa-table', 'linkText': 'Parking lot request' },
-      { 'link': 'emp/dashboard', 'iconName': 'fa fa-table', 'linkText': 'Referrals' }
+      { 'link': '/emp/dashboard', 'iconName': 'fa fa-table', 'linkText': 'Dashboard' },
+      { 'link': '/emp/dashboard', 'iconName': 'fa fa-table', 'linkText': 'Timesheet' },
+      { 'link': '/emp/dashboard', 'iconName': 'fa fa-table', 'linkText': 'Parking lot request' },
+      { 'link': '/emp/dashboard', 'iconName': 'fa fa-table', 'linkText': 'Referrals' },
+      { 'link': '/emp/unlock-timesheet', 'iconName': 'fa fa-table', 'linkText': 'Request to unlock Timesheet' }
     ];
   }
 
