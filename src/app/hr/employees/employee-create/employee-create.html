@@ -76,15 +76,11 @@
         <div class="input-container">
           <label>Status</label>
           <!-- [ngModel]="employee.status" -->
-          <select name="empStatus" (change)="selectStatus($event.target.value)">
+          <select name="empStatus" [(ngModel)]="employee.Status">
             <option value="0">--Select Status--</option>
-            <option value="1">Confirmed</option>
-            <option value="2">Probation</option>
-            <option value="3">Resigned</option>
-            <option value="4">Absconding</option>
-            <!-- <option *ngFor="let team of employeeStatus" value={{team.id}}>
-              {{team.name}}
-            </option> -->
+            <option *ngFor="let stat of status" value={{stat.id}}>
+              {{stat.name}}
+            </option> 
           </select>
         </div>
         <div class="input-container" *ngIf="takeAction">
@@ -109,31 +105,40 @@
           <label>Previous Experience</label>
           <input type="number" id="experience" [(ngModel)]="employee.ExperienceBeforeJoining">
         </div>
+        <div class="input-container">
+            <label>Contact Number</label>
+            <input type="text" [(ngModel)]="employee.ContactNo">
+          </div>
+          <div class="input-container">
+            <label>Alternate Number</label>
+            <input type="text" [(ngModel)]="employee.AltContactNo">
+          </div>
 
-        <div class="input-container">
-          <label>Primary Skills</label>
-          <div class="angular2-multiselect">
-            <angular2-multiselect class="angular2-multiselect" [data]="primarySkillsArray" [(ngModel)]="selectedPrimarySkills" [settings]="settings"
-            (onSelect)="onItemSelect($event, 1)" 
-            (onDeSelect)="OnItemDeSelect($event, 1)"
-            (onSelectAll)="onSelectAll($event, 1)"
-            (onDeSelectAll)="onDeSelectAll($event, 1)">
-            </angular2-multiselect>
-          </div>
-        </div>
-        <div class="input-container">
-          <label>Secondary Skills</label>
-          <div class="angular2-multiselect">
-            <angular2-multiselect class="angular2-multiselect" [data]="secondarySkillsArray" [(ngModel)]="selectedSecondarySkills" [settings]="settings"
-            (onSelect)="onItemSelect($event, 1)" 
-            (onDeSelect)="OnItemDeSelect($event, 1)"
-            (onSelectAll)="onSelectAll($event, 1)"
-            (onDeSelectAll)="onDeSelectAll($event, 1)">
-            </angular2-multiselect>
-          </div>
-        </div>
+       
       </div>
       <div class="column">
+          <div class="input-container">
+              <label>Primary Skills</label>
+              <div class="angular2-multiselect">
+                <angular2-multiselect class="angular2-multiselect" [data]="primarySkillsArray" [(ngModel)]="selectedPrimarySkills" [settings]="settings"
+                (onSelect)="onItemSelect($event, 1)" 
+                (onDeSelect)="OnItemDeSelect($event, 1)"
+                (onSelectAll)="onSelectAll($event, 1)"
+                (onDeSelectAll)="onDeSelectAll($event, 1)">
+                </angular2-multiselect>
+              </div>
+            </div>
+            <div class="input-container">
+              <label>Secondary Skills</label>
+              <div class="angular2-multiselect">
+                <angular2-multiselect class="angular2-multiselect" [data]="secondarySkillsArray" [(ngModel)]="selectedSecondarySkills" [settings]="settings"
+                (onSelect)="onItemSelect($event, 1)" 
+                (onDeSelect)="OnItemDeSelect($event, 1)"
+                (onSelectAll)="onSelectAll($event, 1)"
+                (onDeSelectAll)="onDeSelectAll($event, 1)">
+                </angular2-multiselect>
+              </div>
+            </div>
         <div class="input-container">
           <label>Aadhar Number</label>
           <input type="text" [(ngModel)]="employee.Aadhar">
@@ -154,14 +159,7 @@
           <label>UAN Number</label>
           <input type="text" [(ngModel)]="employee.UAN">
         </div>
-        <div class="input-container">
-          <label>Contact Number</label>
-          <input type="text" [(ngModel)]="employee.ContactNo">
-        </div>
-        <div class="input-container">
-          <label>Alternate Number</label>
-          <input type="text" [(ngModel)]="employee.AltContactNo">
-        </div>
+        
         <div class="input-container">
           <label>Permanent Address</label>
           <input type="text" [(ngModel)]="employee.PermanentAddr">

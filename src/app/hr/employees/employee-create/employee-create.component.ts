@@ -16,6 +16,7 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
     private designations;
     private categories;
     private teams;
+    private status;
     private employee: Employee = new Employee();
     private employeeId: number;
     private designationFetchSub: Subscription;
@@ -23,6 +24,7 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
     private categoryFetchSub: Subscription;
     private skillFetchSub: Subscription;
     private teamFetchSub: Subscription;
+    private statusFetchSub: Subscription;
     private primarySkillsArray: Array<any> = [];
     private secondarySkillsArray: Array<any> = [];
     selectedPrimarySkills: SkillSet[] = [];
@@ -84,6 +86,13 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
             .subscribe(
                 data => {
                     this.teams = data;
+                }
+            );
+
+        this.statusFetchSub = this.dataService.getList('status/getbyStatusTypeId/1')
+            .subscribe(
+                data => {
+                    this.status = data;
                 }
             );
         this.skillFetchSub = this.dataService.getList('skillset/getlist')

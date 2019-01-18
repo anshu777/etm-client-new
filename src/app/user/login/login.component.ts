@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
      this.dataFetchSub$.subscribe((data: any) => {
           localStorage.setItem('userToken', data.access_token);
           localStorage.setItem('userRoles', data.role);
+          localStorage.setItem('empid', data.empid);
           this.myRoute.navigate(['dashboard']);
         },
           (err: HttpErrorResponse) => {
