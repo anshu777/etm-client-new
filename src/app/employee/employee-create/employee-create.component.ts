@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DataService } from '../../../shared/services/data.service';
+import { DataService } from '../../shared/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { SkillSet } from '../../../shared/models/skill-set.model';
-import { Employee } from '../../../shared/models/employee.model';
+import { SkillSet } from '../../shared/models/skill-set.model';
+import { Employee } from '../../shared/models/employee.model';
 
 
 @Component({
     selector: 'app-create-employee',
-    templateUrl: './employee-create.html',
+    templateUrl: '../../hr/employees/employee-create/employee-create.html',
     styleUrls: ['./employee-create.css']
 })
 
@@ -139,15 +139,11 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
             .subscribe(() => {
                 this.router.navigate(['employees']);
             });
-
     }
 
     cancel() {
         this.router.navigate(['employees']);
     }
-
-    /* skill set */
-
 
     selectStatus(id: string) {
         this.takeAction = id === '3';

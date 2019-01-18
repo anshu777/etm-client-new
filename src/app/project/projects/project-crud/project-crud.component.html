@@ -7,7 +7,7 @@
     <label>Project Manager</label>
     <select (change)="selectEmployeeItem($event.target.value)">
         <option value="0">--Select Manager--</option>
-        <option *ngFor="let c of projectManagers" value={{c.id}}>
+        <option *ngFor="let c of projectManagers" value={{c.id}} [selected]="c.id==project.projectManagerId">
             {{c.name}}
         </option>
     </select>
@@ -16,7 +16,7 @@
     <label>Client Name</label>
     <select (change)="selectClientItem($event.target.value)">
         <option value="0">--Select Client--</option>
-        <option *ngFor="let cl of clients" value={{cl.id}}>
+        <option *ngFor="let cl of clients" value={{cl.id}} [selected]="cl.id==project.clientId">
             {{cl.name}}
         </option>
     </select>
@@ -25,7 +25,7 @@
 
 <div class="input-container">
     <label>Start Date</label>
-    <input type="date" [(ngModel)]="project.startDate">
+    <input type="date" [(ngModel)]="project.startDate" value="project.startDate | date: 'yyyy-MM-dd'">
 </div>
 <div class="input-container">
     <label>Comments</label>
@@ -34,14 +34,22 @@
 <div class="input-container">
     <label>Primary Skills</label>
     <div class="angular2-multiselect">
-        <angular2-multiselect [data]="primarySkillsArray" [ngModel]="selectedPrimarySkills">
+        <angular2-multiselect [data]="primarySkillsArray" [ngModel]="selectedPrimarySkills"
+        (onSelect)="onItemSelect($event, 1)" 
+        (onDeSelect)="OnItemDeSelect($event, 1)"
+        (onSelectAll)="onSelectAll($event, 1)"
+        (onDeSelectAll)="onDeSelectAll($event, 1)">
         </angular2-multiselect>
     </div>
 </div>
 <div class="input-container">
     <label>Secondary Skills</label>
     <div class="angular2-multiselect">
-        <angular2-multiselect [data]="secondarySkillsArray" [ngModel]="selectedSecondarySkills">
+        <angular2-multiselect [data]="secondarySkillsArray" [ngModel]="selectedSecondarySkills"
+        (onSelect)="onItemSelect($event, 2)" 
+        (onDeSelect)="OnItemDeSelect($event, 2)"
+        (onSelectAll)="onSelectAll($event, 2)"
+        (onDeSelectAll)="onDeSelectAll($event, 2)">
         </angular2-multiselect>
     </div>
 </div>

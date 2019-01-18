@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class DataService {
     private apiUrl = 'http://localhost:8080/etmapi/api/';    // URL to web API
-
+    private managers:any[];
     constructor(private http: Http) { }
 
     getList(url: any): Observable<any[]> {
@@ -43,9 +43,37 @@ export class DataService {
             .catch(this.handleError);
     }
 
+    put(url: any, data: any): Observable<any> {
+        const headerOptions = new Headers({ 'Content-Type': 'application/json' });
+        const requestOptions = new RequestOptions({ method: RequestMethod.Put, headers: headerOptions });
+        return this.http.put(this.apiUrl + url, data, requestOptions)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    
     delete(url: any, id: number): Observable<any> {
         return this.http.delete(this.apiUrl + url + id)
             .map(this.extractData)
             .catch(this.handleError);
+    }
+
+    getEmpListByDesignationId(id: number): any {
+        this.managers = [];
+        this.getList('employee/getByDesignationId/' + id)
+            .subscribe(
+                (data) => {
+                    data.forEach(x => {
+                        this.managers.push({
+                            id: x.Id,
+                            name: x.Name,
+                        });
+                    });
+
+                },
+                error => {
+
+                }
+            );
+        return this.managers;
     }
 }
