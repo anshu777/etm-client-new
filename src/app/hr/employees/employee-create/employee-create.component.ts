@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { DataService } from '../../../shared/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
@@ -13,6 +13,8 @@ import { SkillSet } from '../../../shared/models/skill-set.model';
 })
 
 export class CreateEmployeeComponent implements OnInit, OnDestroy {
+@Input() empid:number; 
+
     private designations;
     private categories;
     private teams;
@@ -27,8 +29,8 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
     private statusFetchSub: Subscription;
     private primarySkillsArray: Array<any> = [];
     private secondarySkillsArray: Array<any> = [];
-    selectedPrimarySkills: SkillSet[] = [];
-    selectedSecondarySkills: SkillSet[] = [];
+    selectedPrimarySkills: any[]=[];
+    selectedSecondarySkills:  any[]=[];
     settings = {};
     private takeAction: boolean;
     private actionHire: boolean;
@@ -50,6 +52,14 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
                 .subscribe(
                     data => {
                         this.employee = data;
+                        data.Primary.forEach(item => {
+                            this.selectedPrimarySkills.push({ id: item.Id, itemName: item.Name });
+                           //this.onItemSelect(item,1);
+                        });
+                        data.Secondry.forEach(item => {
+                            this.selectedSecondarySkills.push({ id: item.Id, itemName: item.Name });
+                            //this.onItemSelect(item,2);
+                        });
                     }
                 );
 
@@ -174,7 +184,7 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
     }
 
     onItemSelect(item: any, skillId: number) {
-        this.employee.skillsId.push(item.id)
+        this.employee.skillsId.push(item.id);
     }
 
     OnItemDeSelect(item: any, skillId: number) {

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DataService } from '../../shared/services/data.service';
 import { UserDateDto } from '../../employee/timesheet/timesheet.model';
+import { TimesheetRequest } from '../../employee/unlock-timesheet/unlock-timesheet.model'
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-approve-timesheet',
@@ -9,6 +11,9 @@ import { UserDateDto } from '../../employee/timesheet/timesheet.model';
   styleUrls: ['./approve-timesheet.component.css']
 })
 export class ApproveTimesheetComponent implements OnInit {
+
+  displayedColumns = ['id', 'Empid', 'reason', 'status','action'];
+
   title: String = 'Approve Timesheet';
   weekDate: Date;
   setApprove: Boolean = false;
@@ -19,11 +24,26 @@ export class ApproveTimesheetComponent implements OnInit {
   showSpinner: Boolean = false;
   employeeId: number;
   userId: number;
+  pending: any;
   constructor(private dataService: DataService) { }
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
     //get from localstorage for loggedin user
     this.userId = 4;
+    this.dataService.getList('timesheet/requests')
+      .subscribe(data => {
+        this.mapData(data);
+      });
+    console.log(this.pending);
+  }
+
+  mapData(data: any) {
+    this.pending = new MatTableDataSource(data);
+    this.pending.paginator = this.paginator;
+    this.pending.sort = this.sort;
   }
 
   resetWeekDate(event: any) {
@@ -46,7 +66,7 @@ export class ApproveTimesheetComponent implements OnInit {
     this.setApprove = true;
     this.showSpinner = true;
     this.teamFetchSub = this.dataService.getList('team/getList')
-    .finally(() => { this.showSpinner = false; })
+      .finally(() => { this.showSpinner = false; })
       .subscribe(
         data => {
           this.teams = data;
@@ -72,7 +92,7 @@ export class ApproveTimesheetComponent implements OnInit {
     this.teamFetchSub = this.dataService.save('timesheet/approve', userDate)
       .finally(() => { this.showSpinner = false; this.teamId = 0; })
       .subscribe(
-       //show notification
+        //show notification
       );
   }
 

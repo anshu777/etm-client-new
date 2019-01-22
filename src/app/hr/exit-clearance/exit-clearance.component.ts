@@ -64,6 +64,7 @@ export class ExitClearanceComponent implements OnInit {
               this.employee = new Employee();
             }
             else {
+              console.log(data);
               this.mapEmpData(data);
             }
           }

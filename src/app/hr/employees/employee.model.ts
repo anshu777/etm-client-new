@@ -30,7 +30,7 @@ export class Employee {
     CorrespondenceAddr: string;
     Email: string;
     AltEmail: string;
-    skillsId: number[];
+    skillsId: any[];
     constructor() {
         this.Id = null;
         this.BSIPLid = null;
@@ -56,7 +56,7 @@ export class Employee {
         this.UAN = '';
         this.ContactNo = '';
         this.AltContactNo = '';
-        this.ReportingMgr = null;
+        this.ReportingMgr = 0;
         this.ResignationDate = '';
         this.RelievingDate = '';
         this.PermanentAddr = '';

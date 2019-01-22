@@ -50,14 +50,14 @@
           </div>
         <div class="input-container">
           <label>Date Of Joining</label>
-          <input type="date" [(ngModel)]="employee.DateOfJoin">
+          <input type="date" [ngModel]="employee.DateOfJoin|date:'yyyy-MM-dd'" (ngModelChange)="employee.DateOfJoin = $event">
         </div>
         <div class="input-container">
           <label>Category</label>
-          <select name="category" [(ngModel)]="employee.categoryId" (change)="selectCategory($event.target.value)">
+          <select name="category" [(ngModel)]="employee.CategoryId">
             <option value="0">--Select Category--</option>
-            <option *ngFor="let category of categories" value={{category.Id}} [selected]="category.Id==employee.CategoryId">
-             {{category.Id}} {{category.Name}}
+            <option *ngFor="let category of categories" value={{category.Id}}>
+            {{category.Name}}
             </option>
           </select>
         </div>
@@ -132,10 +132,10 @@
               <label>Secondary Skills</label>
               <div class="angular2-multiselect">
                 <angular2-multiselect class="angular2-multiselect" [data]="secondarySkillsArray" [(ngModel)]="selectedSecondarySkills" [settings]="settings"
-                (onSelect)="onItemSelect($event, 1)" 
-                (onDeSelect)="OnItemDeSelect($event, 1)"
-                (onSelectAll)="onSelectAll($event, 1)"
-                (onDeSelectAll)="onDeSelectAll($event, 1)">
+                (onSelect)="onItemSelect($event, 2)" 
+                (onDeSelect)="OnItemDeSelect($event, 2)"
+                (onSelectAll)="onSelectAll($event, 2)"
+                (onDeSelectAll)="onDeSelectAll($event, 2)">
                 </angular2-multiselect>
               </div>
             </div>

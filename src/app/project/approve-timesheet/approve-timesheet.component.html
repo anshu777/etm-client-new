@@ -51,6 +51,53 @@
         </div>
       </div>
 
+
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      
+          <mat-table [dataSource]="pending" matSort>
+
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> <input type="checkbox" id="empAllCheck" (click)="selectAllRows()">
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <input type="checkbox" value="{{row.Id}}" [checked]="row.Checked" (change)="row.Checked = !row.Checked" id="{{row.id}}"
+              (click)="selectRecord($event)">
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Empid">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> EmpId </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.Empid}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="reason">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Reason </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.Reason}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.Status}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+            <mat-cell *matCellDef="let row"> 
+              <button>approve</button> 
+              <button>Reject</button> 
+            </mat-cell>
+          </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+
+      </mat-table>
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
   </div>
 </div>
