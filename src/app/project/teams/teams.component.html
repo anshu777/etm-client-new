@@ -42,7 +42,7 @@
                 <!-- Progress Column -->
                 <ng-container matColumnDef="setupDate">
                   <mat-header-cell *matHeaderCellDef mat-sort-header> SetupDate </mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.setupDate}} </mat-cell>
+                  <mat-cell *matCellDef="let row"> {{row.setupDate | date: 'yyyy-MM-dd'}} </mat-cell>
                 </ng-container>
         
                 <ng-container matColumnDef="projectName">
@@ -63,7 +63,8 @@
 
 <pp-modal-window #teamCrudComponent [visible]="showEditMode" [hideDismissal]="false" size="medium">
     <pp-modal-window-title>
-      Add Team
+      <label *ngIf = "!editMode">Add Team</label>
+    <label *ngIf = "editMode">Edit Team</label>
     </pp-modal-window-title>
     <pp-modal-window-content>
       <et-teams-crud #teamCrud 

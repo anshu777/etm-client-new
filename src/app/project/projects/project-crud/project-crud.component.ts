@@ -25,7 +25,8 @@ export class ProjectCrudComponent implements OnInit, OnDestroy {
     primarySkillsArray: Array<any> = [];
     secondarySkillsArray: Array<any> = [];
     selectedPrimarySkills: Array<SkillSet> = [];
-    public selectedSecondarySkills: Array<SkillSet> = [];
+    selectedSecondarySkills: Array<SkillSet> = [];
+    PrimarySkills : Array<SkillSet> = [];
     private disableSave: Boolean = true;
     private skillFetchSub: Subscription;
 
@@ -44,19 +45,15 @@ export class ProjectCrudComponent implements OnInit, OnDestroy {
                         } else {
                             this.secondarySkillsArray.push({ id: item.Id, itemName: item.Name });
                         }
-
                     });
                 }
             );
-           if(this.project.id){
-            this.selectedPrimarySkills = this.project.primarySkillIds;
-            this.selectedSecondarySkills = this.project.secondarySkillIds;
-           }
     }
 
     ngOnDestroy() {
         this.project = null;
-        
+        this.selectedPrimarySkills = [];
+        this.selectedSecondarySkills = [];
         console.log("ngdestroy");
     }
 
@@ -103,10 +100,5 @@ export class ProjectCrudComponent implements OnInit, OnDestroy {
             this.selectedSecondarySkills= [];
             this.secondarySkillsChange.emit(this.selectedSecondarySkills);
         }
-    }
-
-   public clearSkills(){
-        this.selectedPrimarySkills = [];
-        this.selectedSecondarySkills = [];
     }
 }

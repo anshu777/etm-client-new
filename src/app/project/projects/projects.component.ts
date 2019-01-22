@@ -38,8 +38,8 @@ export class ProjectsComponent implements OnInit {
     clients: Array<any> = [];
     managers: Array<any> = [];
     showSpinner: Boolean = false;
-    @ViewChild('projectComponent')
-    private projectComponent: ProjectCrudComponent;
+    @ViewChild(ProjectCrudComponent)
+    private projectCrudComponent: ProjectCrudComponent;
 
     constructor(private dataService: DataService) { }
 
@@ -81,6 +81,8 @@ export class ProjectsComponent implements OnInit {
 
     editRecrod() {
         this.project = Object.assign({}, this.projects.filteredData.find(x => x.id === Number(this.selectedRows)));
+        // this.projectCrudComponent.PrimarySkills = this.project.primarySkillIds;
+        // this.projectCrudComponent.selectedSecondarySkills = this.project.secondarySkillIds;
         this.showEditMode = true;
         this.editMode = true;
     }
@@ -88,8 +90,8 @@ export class ProjectsComponent implements OnInit {
     cancel() {
         this.showEditMode = false;
         this.editMode = false;
-        this.projectComponent.clearSkills();
-        
+        this.projectCrudComponent.selectedPrimarySkills = [];
+        this.projectCrudComponent.selectedSecondarySkills = [];
     }
 
     addProject() {

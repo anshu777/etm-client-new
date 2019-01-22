@@ -58,7 +58,7 @@ export class TasksComponent implements OnInit {
     }
 
     addTask() {
-        this.task = new Task();
+        //this.task = new Task();
         this.taskTypes = [
             { 'id': 1, 'name': 'Developer' },
             { 'id': 2, 'name': 'QA' },
@@ -121,6 +121,7 @@ export class TasksComponent implements OnInit {
     }
 
     setTaskTypeId(id: any){
-
+        this.task.tasktype = id;
+        console.log("asd");
     }
 }

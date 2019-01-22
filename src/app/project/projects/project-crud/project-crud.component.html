@@ -25,7 +25,7 @@
 
 <div class="input-container">
     <label>Start Date</label>
-    <input type="date" [(ngModel)]="project.startDate" value="project.startDate | date: 'yyyy-MM-dd'">
+    <input type="date" [ngModel]="project.startDate |date: 'yyyy-MM-dd'" (ngModelChange)="project.startDate = $event">
 </div>
 <div class="input-container">
     <label>Comments</label>
@@ -34,7 +34,7 @@
 <div class="input-container">
     <label>Primary Skills</label>
     <div class="angular2-multiselect">
-        <angular2-multiselect [data]="primarySkillsArray" [ngModel]="selectedPrimarySkills"
+        <angular2-multiselect [data]="primarySkillsArray" [ngModel]="PrimarySkills" (ngModelChange)= "selectedPrimarySkills = $event"
         (onSelect)="onItemSelect($event, 1)" 
         (onDeSelect)="OnItemDeSelect($event, 1)"
         (onSelectAll)="onSelectAll($event, 1)"
@@ -45,7 +45,7 @@
 <div class="input-container">
     <label>Secondary Skills</label>
     <div class="angular2-multiselect">
-        <angular2-multiselect [data]="secondarySkillsArray" [ngModel]="selectedSecondarySkills"
+        <angular2-multiselect [data]="secondarySkillsArray" [(ngModel)]="selectedSecondarySkills"
         (onSelect)="onItemSelect($event, 2)" 
         (onDeSelect)="OnItemDeSelect($event, 2)"
         (onSelectAll)="onSelectAll($event, 2)"
