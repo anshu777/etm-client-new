@@ -64,7 +64,7 @@ export class RaiseMrfComponent implements OnInit {
                 }
             );
 
-        this.getEmpListByDesignationId(6);
+        this.getEmpListByDesignationId(11);
     }
 
     addNewMRFRaise() {

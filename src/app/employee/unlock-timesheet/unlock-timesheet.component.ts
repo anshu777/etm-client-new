@@ -19,7 +19,7 @@ export class UnlockTimesheetComponent implements OnInit {
   constructor(private dataservice:DataService,private router:Router) { }
 
   ngOnInit() {
-    this.managers = this.dataservice.getEmpListByDesignationId(6);
+    this.getEmpListByDesignationId(11);
    
   }
 
@@ -49,4 +49,23 @@ export class UnlockTimesheetComponent implements OnInit {
     
   }
 
+  getEmpListByDesignationId(id: number) {
+    this.managers = [];
+
+    this.dataservice.getList('employee/getByDesignationId/' + id)
+        .subscribe(
+            (data) => {
+                data.forEach(x => {
+                    this.managers.push({
+                        id: x.Id,
+                        name: x.Name,
+                    });
+                });
+
+            },
+            error => {
+
+            }
+        );
+}
 }

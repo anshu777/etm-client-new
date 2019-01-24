@@ -101,7 +101,7 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
                     });
                 }
             );
-        this.getEmpListByDesignationId(6);
+        this.getEmpListByDesignationId(11);
     }
 
     getEmpListByDesignationId(id: number) {
