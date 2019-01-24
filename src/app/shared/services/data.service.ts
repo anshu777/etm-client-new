@@ -43,6 +43,14 @@ export class DataService {
             .catch(this.handleError);
     }
 
+    update(url: any, data: any) {
+        const headerOptions = new Headers({ 'Content-Type': 'application/json' });
+        const requestOptions = new RequestOptions({ method: RequestMethod.Put, headers: headerOptions });
+        return this.http.put(this.apiUrl + url, data, requestOptions)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     delete(url: any, id: number): Observable<any> {
         return this.http.delete(this.apiUrl + url + id)
             .map(this.extractData)

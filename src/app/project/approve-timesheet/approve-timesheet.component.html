@@ -81,14 +81,16 @@
 
         <ng-container matColumnDef="status">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.Status}} </mat-cell>
+          <mat-cell *matCellDef="let row"> {{row.Statusvalue}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
             <mat-cell *matCellDef="let row"> 
-              <button>approve</button> 
-              <button>Reject</button> 
+              <div *ngIf="row.Status == 1">
+              <button (click)="approved(row)">approve</button> 
+              <button (click)="rejected(row)">Reject</button> 
+            </div>
             </mat-cell>
           </ng-container>
 

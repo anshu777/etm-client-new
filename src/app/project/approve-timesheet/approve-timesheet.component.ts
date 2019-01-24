@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DataService } from '../../shared/services/data.service';
 import { UserDateDto } from '../../employee/timesheet/timesheet.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TimesheetRequest } from '../../employee/unlock-timesheet/unlock-timesheet.model'
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
@@ -25,7 +26,7 @@ export class ApproveTimesheetComponent implements OnInit {
   employeeId: number;
   userId: number;
   pending: any;
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private router:Router) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -33,11 +34,16 @@ export class ApproveTimesheetComponent implements OnInit {
   ngOnInit() {
     //get from localstorage for loggedin user
     this.userId = 4;
+    this.getrequest();
+   // console.log(this.pending);
+  }
+
+  getrequest()
+  {
     this.dataService.getList('timesheet/requests')
       .subscribe(data => {
         this.mapData(data);
       });
-    console.log(this.pending);
   }
 
   mapData(data: any) {
@@ -107,6 +113,33 @@ export class ApproveTimesheetComponent implements OnInit {
       .subscribe(
         //show noification
       );
+  }
+
+  approved(data:any)
+  {
+    var request;
+    request = { Id:data.Id, Empid:data.Empid,Reason:data.Reason,Status:2,ManagerId:data.ManagerId }
+    this.dataService.update('timesheet/request/put',request)
+    .finally(()=> this.showSpinner=false)
+    .subscribe(data => { 
+                this.getrequest();
+                this.router.navigate(['approve-timesheet']);
+    });
+    console.log(data);
+  }
+  rejected(data:any)
+  {
+    var request;
+    request = { Id:data.Id, Empid:data.Empid,Reason:data.Reason,Status:3,ManagerId:data.ManagerId }
+    this.dataService.update('timesheet/request/put',request)
+    .finally(()=> this.showSpinner=false)
+    .subscribe(
+      data =>{
+        this.getrequest();
+        this.router.navigate(['approve-timesheet']);
+      }
+    );
+    console.log(data);
   }
 
 }
