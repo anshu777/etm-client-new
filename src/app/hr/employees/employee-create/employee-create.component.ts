@@ -36,6 +36,7 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
     private actionHire: boolean;
     private showSpinner: Boolean = false;
     private managers: any[] = [];
+    private isEditmode:boolean = false;
     constructor(private router: Router, private activatedRoute: ActivatedRoute, private dataService: DataService) {
 
     }
@@ -51,6 +52,7 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
                 .finally(() => this.getOtherFields())
                 .subscribe(
                     data => {
+                        this.isEditmode=true;
                         this.employee = data;
                         data.Primary.forEach(item => {
                             this.selectedPrimarySkills.push({ id: item.Id, itemName: item.Name });
@@ -153,11 +155,21 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
     }
 
     addNewEmployee() {
-        this.dataService.save('employee/post', this.employee)
+        if(this.isEditmode)
+        {
+            this.dataService.update('employee/put',this.employee)
+            .finally(() => this.showSpinner=false )
+            .subscribe(() => {
+                this.router.navigate(['employees']);
+            })
+        }
+        else{
+            this.dataService.save('employee/post', this.employee)
             .finally(() => this.showSpinner = false)
             .subscribe(() => {
                 this.router.navigate(['employees']);
             });
+        }
 
     }
 
@@ -188,7 +200,7 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
     }
 
     OnItemDeSelect(item: any, skillId: number) {
-        this.employee.skillsId.splice(this.employee.skillsId.find(item.id), 1)
+        this.employee.skillsId.splice(this.employee.skillsId.indexOf(item.id), 1)
     }
 
     onSelectAll(items: any, skillId: number) {
