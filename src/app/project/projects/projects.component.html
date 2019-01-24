@@ -7,7 +7,6 @@
                 <li (click)="addProject()"><i class="fa fa-plus-square"></i> Add New</li>
                 <li class="active" *ngIf="isSelected && isSingleSelected" (click)="editRecrod()"><i class="fa fa-pencil-square"></i> Edit</li>
                 <li class="active" *ngIf="isSelected && isSingleSelected" (click)="deleteRecord()"><i class="fa fa-trash"></i> Delete</li>
-        
             </ol>
         </div>
     </div><!-- /.row -->
@@ -71,13 +70,14 @@
 
 <pp-modal-window #projectComponent [visible]="showEditMode" [hideDismissal]="false" size="medium">
   <pp-modal-window-title>
-    Add Project
+    <label *ngIf = "!editMode">Add Project</label>
+    <label *ngIf = "editMode">Edit Project</label>
   </pp-modal-window-title>
   <pp-modal-window-content>
     <et-project-crud #projectCrud 
       [project]="project" 
       [clients]="clients" 
-      [projectManagers]="employees"
+      [projectManagers]="managers"
       (clientItemIdChange)="setClient($event)"
       (empItemIdChange)="setEmployee($event)"
       (primarySkillsChange)="setPrimarySkills($event)"

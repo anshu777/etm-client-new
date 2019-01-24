@@ -16,7 +16,8 @@ export class EmployeeComponent implements OnInit {
       { 'link': '/emp/dashboard', 'iconName': 'fa fa-table', 'linkText': 'Timesheet' },
       { 'link': '/emp/dashboard', 'iconName': 'fa fa-table', 'linkText': 'Parking lot request' },
       { 'link': '/emp/dashboard', 'iconName': 'fa fa-table', 'linkText': 'Referrals' },
-      { 'link': '/emp/unlock-timesheet', 'iconName': 'fa fa-table', 'linkText': 'Request to unlock Timesheet' }
+      { 'link': '/emp/unlock-timesheet', 'iconName': 'fa fa-table', 'linkText': 'Request to unlock Timesheet' },
+      { 'link': '/emp/employee-create', 'iconName': 'fa fa-table', 'linkText': 'Edit Profile' },
     ];
   }
 

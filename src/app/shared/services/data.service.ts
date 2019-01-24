@@ -35,6 +35,14 @@ export class DataService {
         return Observable.throw(errMsg);
     }
 
+    put(url: any, data: any): Observable<any> {
+        const headerOptions = new Headers({ 'Content-Type': 'application/json' });
+        const requestOptions = new RequestOptions({ method: RequestMethod.Put, headers: headerOptions });
+        return this.http.put(this.apiUrl + url, data, requestOptions)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    
     save(url: any, data: any) {
         const headerOptions = new Headers({ 'Content-Type': 'application/json' });
         const requestOptions = new RequestOptions({ method: RequestMethod.Post, headers: headerOptions });
@@ -47,21 +55,5 @@ export class DataService {
         return this.http.delete(this.apiUrl + url + id)
             .map(this.extractData)
             .catch(this.handleError);
-    }
-
-    getEmpListByDesignationId(designationId):any{
-        var managers;
-        this.getList('employee/getByDesignationId/'+designationId)
-        .subscribe(
-            (data) => {
-                data.forEach(element => {
-                    managers.push({
-                        id:element.Id,
-                        name:element.Name,
-                    })
-                });
-            }
-        );
-        return managers;
     }
 }

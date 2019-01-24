@@ -7,12 +7,12 @@
     <label>Project</label>
     <select (change)="selectProjectItem($event.target.value)">
         <option value="0">--Select Project--</option>
-        <option *ngFor="let c of projects" value={{c.id}}>
+        <option *ngFor="let c of projects" value={{c.id}} [selected] = "c.id == team.projectId">
           {{c.name}}
         </option>
       </select>
 </div>
 <div class="input-container">
     <label>Setup Date</label>
-    <input type="date" [(ngModel)]="team.setupDate">
+    <input type="date" [ngModel]="team.setupDate |date: 'yyyy-MM-dd'" (ngModelChange)="team.setupDate = $event">
 </div>

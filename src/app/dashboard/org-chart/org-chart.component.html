@@ -1,1 +1,30 @@
-<ng2-org-chart [topEmployee]="topEmployee"></ng2-org-chart>
+
+<div class="template" >
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2>Organisation Chart </h2>
+      </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="input-container">
+                <label>Choose Project</label>
+                <select name="project" [(ngModel)]="projectId" >
+                <option value="0">--Select Project--</option>
+                <option *ngFor="let project of projects" value={{project.id}} >
+                    {{project.projectName}}
+                </option>
+                </select>
+            </div>
+        </div>
+        <div class="column">
+                <div class="btn btn-default">
+                    <div>
+                            <button (click) = "getEmpByProject()">Search</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <etm-spinner [showSpinner]="showSpinner"></etm-spinner>
+<ng2-org-chart *ngIf = "showOrgChart && !showSpinner" [topEmployee]="topEmployee"></ng2-org-chart>
+</div>

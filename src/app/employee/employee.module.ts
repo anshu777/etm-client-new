@@ -8,10 +8,11 @@ import { employeeRouting } from './employee.routing';
 import { EmployeeComponent } from './employee.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UnlockTimesheetComponent } from './unlock-timesheet/unlock-timesheet.component';
+import { CreateEmployeeComponent } from './employee-create/employee-create.component';
 
 @NgModule({
   imports: [employeeRouting, CommonModule, SharedModule],
-  declarations: [EmployeeComponent, TimesheetComponent, TableComponent, DashboardComponent, UnlockTimesheetComponent],
+  declarations: [EmployeeComponent, TimesheetComponent, TableComponent, DashboardComponent, UnlockTimesheetComponent, CreateEmployeeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class EmployeeModule { }

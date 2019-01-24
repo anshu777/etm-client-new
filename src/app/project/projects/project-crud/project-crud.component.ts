@@ -26,6 +26,7 @@ export class ProjectCrudComponent implements OnInit, OnDestroy {
     secondarySkillsArray: Array<any> = [];
     selectedPrimarySkills: Array<SkillSet> = [];
     selectedSecondarySkills: Array<SkillSet> = [];
+    PrimarySkills : Array<SkillSet> = [];
     private disableSave: Boolean = true;
     private skillFetchSub: Subscription;
 
@@ -44,14 +45,16 @@ export class ProjectCrudComponent implements OnInit, OnDestroy {
                         } else {
                             this.secondarySkillsArray.push({ id: item.Id, itemName: item.Name });
                         }
-
                     });
                 }
             );
     }
 
     ngOnDestroy() {
-
+        this.project = null;
+        this.selectedPrimarySkills = [];
+        this.selectedSecondarySkills = [];
+        console.log("ngdestroy");
     }
 
     selectClientItem(id: number) {
@@ -64,24 +67,16 @@ export class ProjectCrudComponent implements OnInit, OnDestroy {
 
     onItemSelect(item: any, skillId: number) {
         if (skillId === 1) {
-            this.selectedPrimarySkills.push(item);
-
             this.primarySkillsChange.emit(this.selectedPrimarySkills);
         } else {
-            this.selectedSecondarySkills.push(item);
-            //this.project.secondarySkillIds.push(item);
             this.secondarySkillsChange.emit(this.selectedSecondarySkills);
         }
     }
 
     OnItemDeSelect(item: any, skillId: number) {
         if (skillId === 1) {
-            this.selectedPrimarySkills.slice(item);
-            //this.project.primarySkillIds.slice(item);
             this.primarySkillsChange.emit(this.selectedPrimarySkills);
         } else {
-            this.selectedSecondarySkills.slice(item);
-            //this.project.secondarySkillIds.slice(item);
             this.secondarySkillsChange.emit(this.selectedSecondarySkills);
         }
     }
@@ -101,9 +96,9 @@ export class ProjectCrudComponent implements OnInit, OnDestroy {
             this.selectedPrimarySkills = [];
             this.primarySkillsChange.emit(this.selectedPrimarySkills);
         } else {
-            this.selectedSecondarySkills = [];
+
+            this.selectedSecondarySkills= [];
             this.secondarySkillsChange.emit(this.selectedSecondarySkills);
         }
     }
-
 }

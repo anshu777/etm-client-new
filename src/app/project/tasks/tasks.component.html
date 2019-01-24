@@ -60,13 +60,14 @@
 
 <pp-modal-window #taskCrudComponent [visible]="showEditMode" [hideDismissal]="false" size="medium">
     <pp-modal-window-title>
-      Add Task
+      <label *ngIf = "!editMode">Add Task</label>
+    <label *ngIf = "editMode">Edit Task</label>
     </pp-modal-window-title>
     <pp-modal-window-content>
       <et-task-crud #taskCrud 
         [task]="task"
         [taskTypes]="taskTypes" 
-        (selectTaskTypeItem)="setTaskTypeId($event)">
+        (taskItemIdChange)="setTaskTypeId($event)">
       </et-task-crud>
     </pp-modal-window-content>
     <pp-modal-window-actions>

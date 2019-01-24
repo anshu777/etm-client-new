@@ -25,6 +25,7 @@ export class TasksComponent implements OnInit {
     private saveDataSub: Subscription;
     private deleteDataSub: Subscription;
     showEditMode = false;
+    editMode = false;
     task: Task = new Task();
     private teams: Array<any> = [];
     taskTypes: Array<any> = [];
@@ -121,6 +122,13 @@ export class TasksComponent implements OnInit {
     }
 
     setTaskTypeId(id: any){
+        this.task.taskType = id;
+        console.log("asd");
+    }
 
+    editRecrod() {
+        this.task = Object.assign({}, this.tasks.filteredData.find(x => x.id === Number(this.selectedRows)));
+        this.showEditMode = true;
+        this.editMode = true;
     }
 }

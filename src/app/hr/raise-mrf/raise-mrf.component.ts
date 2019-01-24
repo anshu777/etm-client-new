@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { MRF } from './MRF.model';
 import { SkillSet } from '../../shared//models/skill-set.model';
+import { ETNotificationService } from '../../shared/services/notification.service'
 import { Project } from '../../project/projects/project.model';
 
 @Component({
@@ -26,7 +27,8 @@ export class RaiseMrfComponent implements OnInit {
     private showSpinner: Boolean = false;
     private managers: any[];
     private IsCitySelected: boolean = false;
-    constructor(private router: Router, private activatedRoute: ActivatedRoute, private dataService: DataService) {
+    constructor(private router: Router, private activatedRoute: ActivatedRoute,
+         private dataService: DataService, private notificationService: ETNotificationService) {
     }
 
 
@@ -67,8 +69,13 @@ export class RaiseMrfComponent implements OnInit {
 
     addNewMRFRaise() {
         this.dataService.save('MRF/post', this.MRF)
+        .finally(() => this.router.navigate['employees'])
             .subscribe(
-                this.router.navigate['employees']
+                (success) => {
+                    // this.onSuccess(success);
+                    this.notificationService.success('Saved Successfully'); 
+                }
+                
             );
     }
 

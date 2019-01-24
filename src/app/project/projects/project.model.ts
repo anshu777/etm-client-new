@@ -6,8 +6,8 @@ export class Project {
     clientId: number;
     clientName: string;
     officeAddress: string;
-    startDate: string;
-    dueDate: string;
+    startDate: Date;
+    dueDate: Date;
     comments: string;
     primarySkillIds: Array<any>;
     secondarySkillIds: Array<any>;

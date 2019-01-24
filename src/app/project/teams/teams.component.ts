@@ -26,6 +26,10 @@ export class TeamsComponent implements OnInit {
     errorMessage: string;
     title = 'Teams';
     showEditMode = false;
+    editMode = false;
+    private selectedRows: Array<any> = [];
+    private isSelected: boolean;
+    private isSingleSelected: boolean;
     showAssignTask = false;
     team: Team = new Team();
     projects: Array<any> = [];
@@ -88,17 +92,34 @@ export class TeamsComponent implements OnInit {
 
     saveTeam() {
 
-        this.saveDataSub = this.dataService.save('team/post', this.team)
-            .subscribe(
-                (success) => {
-                    // this.onSuccess(success);
-                    this.showEditMode = false;
-                    this.bindList();
-                },
-                err => {
-                    // this.handleError(err);
-                    console.log(err);
-                });
+        if (this.team.id != null && this.team.id != 0) {
+            this.saveDataSub = this.dataService.put('team/put', this.team)
+                .finally(() => this.showSpinner = false)
+                .subscribe(
+                    (success) => {
+                        // this.onSuccess(success);
+                        this.showEditMode = false;
+                        this.bindList();
+                    },
+                    err => {
+                        // this.handleError(err);
+                        console.log(err);
+                    });
+        }
+        else {
+            this.saveDataSub = this.dataService.save('team/post', this.team)
+                .subscribe(
+                    (success) => {
+                        // this.onSuccess(success);
+                        this.showEditMode = false;
+                        this.bindList();
+                    },
+                    err => {
+                        // this.handleError(err);
+                        console.log(err);
+                    });
+
+        }
     }
 
     setProjectId(id: number) {
@@ -109,5 +130,24 @@ export class TeamsComponent implements OnInit {
         this.router.navigate(['assigntask']);
     }
 
+    selectRecord(event: any) {
+        const checkbox = event.target as HTMLInputElement;
+        if (checkbox.checked) {
+            this.selectedRows.push(checkbox.id);
+            this.isSelected = true;
+        } else {
+            var index = this.selectedRows.indexOf((checkbox.id));
+            this.selectedRows.splice(index, 1);
+            if (this.selectedRows.length === 0) {
+                this.isSelected = false;
+            }
+        }
+        this.isSingleSelected = this.selectedRows.length === 1;
+    }
 
+    editRecrod() {
+        this.team = Object.assign({}, this.teams.filteredData.find(x => x.id === Number(this.selectedRows)));
+        this.showEditMode = true;
+        this.editMode = true;
+    }
 }

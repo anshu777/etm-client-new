@@ -4,6 +4,7 @@ import { EmployeeComponent } from './employee.component';
 import { AuthGuard } from '../auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {UnlockTimesheetComponent } from './unlock-timesheet/unlock-timesheet.component';
+import { CreateEmployeeComponent } from './employee-create/employee-create.component';
 
 const employeeRoutes: Routes = [
     {
@@ -13,7 +14,8 @@ const employeeRoutes: Routes = [
         children: [
             { path: 'emp/timesheet/:employeeId/:teamId', component: TimesheetComponent },
             { path: 'emp/dashboard', component: DashboardComponent },
-            { path: 'emp/unlock-timesheet', component: UnlockTimesheetComponent }
+            { path: 'emp/unlock-timesheet', component: UnlockTimesheetComponent },
+            { path: 'emp/employee-create', component: CreateEmployeeComponent }
         ]
     },
     {
