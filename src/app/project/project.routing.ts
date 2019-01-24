@@ -27,7 +27,8 @@ const projectRoutes: Routes = [
             { path: '', redirectTo: 'pm/dashboard', pathMatch: 'full' }
         ]
     },
-    { path: 'pm', redirectTo: 'pm/dashboard', pathMatch: 'full' }
+    { path: 'pm', redirectTo: 'pm/dashboard', pathMatch: 'full' },
+    { path: 'approve-timesheet', redirectTo: 'pm/approve-timesheet', pathMatch: 'full' }
 ];
 
 export const projectRouting = RouterModule.forChild(projectRoutes);
