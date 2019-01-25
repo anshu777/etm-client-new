@@ -7,7 +7,7 @@
     <label>Applicable for</label>
     <select (change)="selectTaskTypeItem($event.target.value)">
         <option value="0">--Select Task Type--</option>
-        <option *ngFor="let c of taskTypes" value={{c.id}} [selected] = "c.id == task.taskType">
+        <option *ngFor="let c of taskTypes" value={{c.id}} [selected]= "c.id == task.taskType">
           {{c.name}}
         </option>
       </select>

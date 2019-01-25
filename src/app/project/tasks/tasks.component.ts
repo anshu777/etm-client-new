@@ -94,7 +94,7 @@ export class TasksComponent implements OnInit {
             this.selectedRows.push(checkbox.value);
             this.isSelected = true;
         } else {
-            this.selectedRows.splice(this.selectedRows.indexOf(Number(checkbox.value)), 1);
+            this.selectedRows.splice(this.selectedRows.indexOf(checkbox.value), 1);
             if (this.selectedRows.length === 0) {
                 this.isSelected = false;
             }

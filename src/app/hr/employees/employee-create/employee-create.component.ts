@@ -46,6 +46,7 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
             this.employeeId = params['employeeId'];
         });
 
+        this.employee.skillsId = [];
         if (this.employeeId) {
 
             this.emplooyeeFetchSub = this.dataService.get('employee/get/' + this.employeeId)

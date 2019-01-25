@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('userToken', data.access_token);
           localStorage.setItem('userRoles', data.role);
           localStorage.setItem('empid', data.empid);
+          localStorage.setItem('teamid',data.teamid);
           this.myRoute.navigate(['dashboard']);
         },
           (err: HttpErrorResponse) => {

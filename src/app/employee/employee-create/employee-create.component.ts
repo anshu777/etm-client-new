@@ -25,35 +25,45 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
     private teamFetchSub: Subscription;
     private primarySkillsArray: Array<any> = [];
     private secondarySkillsArray: Array<any> = [];
-    selectedPrimarySkills: SkillSet[] = [];
-    selectedSecondarySkills: SkillSet[] = [];
+    selectedPrimarySkills: any[] = [];
+    selectedSecondarySkills: any[] = [];
     settings = {};
     private takeAction: boolean;
     private actionHire: boolean;
     private showSpinner: Boolean = false;
     private managers: any[] = [];
+    private isEditmode=false;
     constructor(private router: Router, private activatedRoute: ActivatedRoute, private dataService: DataService) {
 
     }
 
     ngOnInit() {
-        this.activatedRoute.params.forEach(params => {
-            this.employeeId = params['employeeId'];
-        });
+        this.employeeId=Number(localStorage.getItem("empid"));
 
-        if (this.employeeId) {
+       
 
-            this.emplooyeeFetchSub = this.dataService.get('employee/get/' + this.employeeId)
-                .finally(() => this.getOtherFields())
-                .subscribe(
-                    data => {
-                        this.employee = data;
-                    }
-                );
+    if (this.employeeId) {
 
-        }
-        if (!this.employeeId)
-            this.getOtherFields();
+        this.emplooyeeFetchSub = this.dataService.get('employee/get/' + this.employeeId)
+            .finally(() => this.getOtherFields())
+            .subscribe(
+                data => {
+                    this.isEditmode=true;
+                    this.employee = data;
+                    data.Primary.forEach(item => {
+                        this.selectedPrimarySkills.push({ id: item.Id, itemName: item.Name });
+                       //this.onItemSelect(item,1);
+                    });
+                    data.Secondry.forEach(item => {
+                        this.selectedSecondarySkills.push({ id: item.Id, itemName: item.Name });
+                        //this.onItemSelect(item,2);
+                    });
+                }
+            );
+
+    }
+    if (!this.employeeId)
+        this.getOtherFields();
 
         this.settings = {
             text: '--Select Skill--',
@@ -134,11 +144,11 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
     }
 
     addNewEmployee() {
-        this.dataService.save('employee/post', this.employee)
-            .finally(() => this.showSpinner = false)
+            this.dataService.update('employee/put',this.employee)
+            .finally(() => this.showSpinner=false )
             .subscribe(() => {
                 this.router.navigate(['employees']);
-            });
+            })
     }
 
     cancel() {
@@ -165,7 +175,7 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
     }
 
     OnItemDeSelect(item: any, skillId: number) {
-        this.employee.skillsId.splice(this.employee.skillsId.find(item.id), 1)
+        this.employee.skillsId.splice(this.employee.skillsId.indexOf(item.id), 1)
     }
 
     onSelectAll(items: any, skillId: number) {

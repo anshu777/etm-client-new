@@ -45,7 +45,7 @@ export class ProjectsComponent implements OnInit {
 
     ngOnInit() {
         this.bindList();
-        this.managers = this.getEmpListByDesignationId(6);
+        this.getEmpListByDesignationId(11);
         this.clientDataSub = this.dataService.getList('client/getlist')
             .subscribe(
                 (data) => {
@@ -169,18 +169,18 @@ export class ProjectsComponent implements OnInit {
     }
 
     getEmpListByDesignationId(designationId):any{
-        var managers;
+        
         this.dataService.getList('employee/getByDesignationId/'+designationId)
         .subscribe(
             (data) => {
                 data.forEach(element => {
-                    managers.push({
+                    this.managers.push({
                         id:element.Id,
                         name:element.Name,
                     })
                 });
             }
         );
-        return managers;
+        
     }
 }
