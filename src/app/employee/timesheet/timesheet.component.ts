@@ -65,10 +65,14 @@ export class TimesheetComponent implements OnInit {
 
     ngOnInit() {
         /* Initialize this.* bindable members with data.* members */
-        this.route.params.forEach(params => {
-            this.employeeId = params['employeeId'];
-            this.teamId = params['teamId'];
-        });
+        // this.route.params.forEach(params => {
+        //     this.employeeId = params['employeeId'];
+        //     this.teamId = params['teamId'];
+        // });
+
+        this.employeeId = Number(localStorage.getItem('empid'));
+        this.teamId = Number(localStorage.getItem('teamid'));
+
 
         this.employeeTimesheet = new EmployeeTimesheet();
         this.employeeTimesheet.employeeId = this.employeeId;
@@ -100,7 +104,11 @@ export class TimesheetComponent implements OnInit {
     resetHeaders() {
         this.header = [];
         const wDate: Date = new Date();
+        //wDate.setDate(this.weekDate);
+
         wDate.setDate(this.weekDate.getDate() - 1);
+        wDate.setMonth(this.weekDate.getMonth());
+        wDate.setFullYear(this.weekDate.getFullYear());
         for (let ctr = 1; ctr <= 7; ctr++) {
             this.header.push({
                 id: ctr,
@@ -126,6 +134,7 @@ export class TimesheetComponent implements OnInit {
 
         const userDate = new UserDateDto();
         userDate.userId = this.employeeId;
+        userDate.employeeId = this.employeeId;
         userDate.date = this.weekDate;
         this.showSpinner = true;
         this.etDataSub = this.dataService.save('timesheet/getbyuserid/', userDate)

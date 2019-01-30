@@ -14,7 +14,7 @@ const projectRoutes: Routes = [
     {
         path: '', component: ProjectComponent,
         canActivate: [AuthGuard],
-        data: { roles: ['Admin'] },
+        data: { roles: ['Manager'] },
         children: [
             { path: 'projects', component: ProjectsComponent },
             { path: 'tasks', component: TasksComponent },

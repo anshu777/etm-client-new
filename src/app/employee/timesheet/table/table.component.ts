@@ -13,7 +13,7 @@ export class TableComponent implements OnInit, OnChanges {
   rowFields: Array<TimesheetRow> = []; //has one task and rest weakDates ...used internal
   private timeSheetRow: TimesheetRow = new TimesheetRow();
   @Input() inputTimesheetRows: Array<TimesheetRow> = []; //set from timesheet
-
+  //ctr: Array<Number>; 
   ngOnInit() {
     let ctr = 1;
     this.leftColumns.forEach((x) => {
@@ -55,13 +55,13 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    let ctr = 1;
+    let i = 0;
     this.rowFields.forEach((x) => {
-      if (!!this.inputTimesheetRows.find(z => z.taskId === ctr)) {
+      if (!!this.inputTimesheetRows.find(z => z.taskId === this.leftColumns[i].id)) {
         x.timesheetColumns.forEach((col) => {
           // taskid 1, having 7 days
           col.hours = 5;
-          this.inputTimesheetRows.filter(z => z.taskId === ctr).forEach((tsRow) => {
+          this.inputTimesheetRows.filter(z => z.taskId === this.leftColumns[i].id).forEach((tsRow) => {
             if (!!tsRow.timesheetColumns.find(t => t.date.getDate() === col.date.getDate() && t.date.getMonth() === col.date.getMonth())) {
               col.hours = tsRow.timesheetColumns
                 .find(t => t.date.getDate() === col.date.getDate() && t.date.getMonth() === col.date.getMonth()).hours;
@@ -72,7 +72,7 @@ export class TableComponent implements OnInit, OnChanges {
         });
 
       }
-      ctr++;
+      i++;
     });
 
 
@@ -99,8 +99,6 @@ export class TableComponent implements OnInit, OnChanges {
     }
 
   }
-
-
 
   changeValue(tColId: number, date: string, taskId: number, event: any) {
     const tsrow = this.rowFields.find(x => x.id === taskId);

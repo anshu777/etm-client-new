@@ -20,7 +20,7 @@
             <td class="text-left task-name" [ngClass]="(r.taskName === 'Total')?'greyBox':''">{{r.taskName}}</td>
 
             <td *ngFor="let h of r.timesheetColumns; let id = index" [ngClass]="(h.taskId === rowFields.length)?'greyBox':''">
-              <div *ngIf="h.taskId < rowFields.length">
+              <div *ngIf="h.taskId != rowFields.length">
                 <input class="text-center" style="width: 30px; border:none;" type="text" (keyup)="changeValue(h.id, h.date, h.taskId, $event)"
                   [(ngModel)]="h.hours">
               </div>

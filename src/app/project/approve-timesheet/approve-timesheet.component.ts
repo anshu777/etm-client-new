@@ -13,7 +13,7 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 })
 export class ApproveTimesheetComponent implements OnInit {
 
-  displayedColumns = ['id', 'Empid', 'reason', 'status','action'];
+  displayedColumns = ['id', 'Empid', 'reason', 'status', 'action'];
 
   title: String = 'Approve Timesheet';
   weekDate: Date;
@@ -26,7 +26,7 @@ export class ApproveTimesheetComponent implements OnInit {
   employeeId: number;
   userId: number;
   pending: any;
-  constructor(private dataService: DataService, private router:Router) { }
+  constructor(private dataService: DataService, private router: Router) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -35,11 +35,10 @@ export class ApproveTimesheetComponent implements OnInit {
     //get from localstorage for loggedin user
     this.userId = 4;
     this.getrequest();
-   // console.log(this.pending);
+    // console.log(this.pending);
   }
 
-  getrequest()
-  {
+  getrequest() {
     this.dataService.getList('timesheet/requests')
       .subscribe(data => {
         this.mapData(data);
@@ -115,31 +114,27 @@ export class ApproveTimesheetComponent implements OnInit {
       );
   }
 
-  approved(data:any)
-  {
+  approved(data: any) {
     var request;
-    request = { Id:data.Id, Empid:data.Empid,Reason:data.Reason,Status:2,ManagerId:data.ManagerId }
-    this.dataService.update('timesheet/request/put',request)
-    .finally(()=> this.showSpinner=false)
-    .subscribe(data => { 
-                this.getrequest();
-                this.router.navigate(['approve-timesheet']);
-    });
-    console.log(data);
-  }
-  rejected(data:any)
-  {
-    var request;
-    request = { Id:data.Id, Empid:data.Empid,Reason:data.Reason,Status:3,ManagerId:data.ManagerId }
-    this.dataService.update('timesheet/request/put',request)
-    .finally(()=> this.showSpinner=false)
-    .subscribe(
-      data =>{
+    request = { Id: data.Id, Empid: data.Empid, Reason: data.Reason, Status: 2, ManagerId: data.ManagerId }
+    this.dataService.update('timesheet/request/put', request)
+      .finally(() => this.showSpinner = false)
+      .subscribe(data => {
         this.getrequest();
         this.router.navigate(['approve-timesheet']);
-      }
-    );
-    console.log(data);
+      });
+  }
+  rejected(data: any) {
+    var request;
+    request = { Id: data.Id, Empid: data.Empid, Reason: data.Reason, Status: 3, ManagerId: data.ManagerId }
+    this.dataService.update('timesheet/request/put', request)
+      .finally(() => this.showSpinner = false)
+      .subscribe(
+        data => {
+          this.getrequest();
+          this.router.navigate(['approve-timesheet']);
+        }
+      );
   }
 
 }

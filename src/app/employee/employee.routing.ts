@@ -10,9 +10,9 @@ const employeeRoutes: Routes = [
     {
         path: '', component: EmployeeComponent,
         canActivate: [AuthGuard],
-        data: { roles: ['Admin'] },
+        data: { roles: ['Normal'] },
         children: [
-            { path: 'emp/timesheet/:employeeId/:teamId', component: TimesheetComponent },
+            { path: 'emp/timesheet', component: TimesheetComponent },
             { path: 'emp/dashboard', component: DashboardComponent },
             { path: 'emp/unlock-timesheet', component: UnlockTimesheetComponent },
             { path: 'emp/employee-create', component: CreateEmployeeComponent }

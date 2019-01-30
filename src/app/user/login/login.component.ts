@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
     private myRoute: Router, private userService: UserService
   ) {
     this.form = fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      // email: ['', [Validators.required, Validators.email]],
+      empid: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -30,17 +31,20 @@ export class LoginComponent implements OnInit {
 
   login() {
     //if (this.form.valid) {
-     this.dataFetchSub$ = this.userService.userAuthentication(this.form.value.email, this.form.value.password);
-     this.dataFetchSub$.subscribe((data: any) => {
-          localStorage.setItem('userToken', data.access_token);
-          localStorage.setItem('userRoles', data.role);
-          localStorage.setItem('empid', data.empid);
-          localStorage.setItem('teamid',data.teamid);
-          this.myRoute.navigate(['dashboard']);
-        },
-          (err: HttpErrorResponse) => {
-            this.isLoginError = true;
-          });
+    this.dataFetchSub$ = this.userService.userAuthentication(this.form.value.empid, this.form.value.password);
+    this.dataFetchSub$.subscribe((data: any) => {
+      localStorage.setItem('userToken', data.access_token);
+      localStorage.setItem('userRoles', data.role);
+      localStorage.setItem('empid', data.empid);
+      localStorage.setItem('teamid', data.teamid);
+      // route to respective dashboard
+      const dashboardUrl: any = this.userService.getDashboardURL(JSON.parse(data.role)[0].Name.toLowerCase());
+      this.myRoute.navigate([dashboardUrl]);
+
+    },
+      (err: HttpErrorResponse) => {
+        this.isLoginError = true;
+      });
     //}
 
 

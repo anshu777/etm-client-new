@@ -147,12 +147,12 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
             this.dataService.update('employee/put',this.employee)
             .finally(() => this.showSpinner=false )
             .subscribe(() => {
-                this.router.navigate(['employees']);
+                this.router.navigate(['emp']);
             })
     }
 
     cancel() {
-        this.router.navigate(['employees']);
+        this.router.navigate(['emp']);
     }
 
     selectStatus(id: string) {
@@ -171,7 +171,8 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
     }
 
     onItemSelect(item: any, skillId: number) {
-        this.employee.skillsId.push(item.id)
+       
+        this.employee.skillsId.push(item.id);
     }
 
     OnItemDeSelect(item: any, skillId: number) {

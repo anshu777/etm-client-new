@@ -13,13 +13,14 @@ export class ETNotificationComponent implements OnInit {
 	constructor(private alertService: ETNotificationService) { }
 
 	ngOnInit() {
+		this.staticAlertClosed = true;
 		this.alertService.getETNotification().subscribe((alert: ETNotification) => {
 			if (!alert) {
 				// clear alerts when an empty alert is received
 				this.alerts = [];
 				return;
 			}
-
+			
 			// add alert to array
 			this.alerts.push(alert);
 			setTimeout(() => this.staticAlertClosed = true, 5000);

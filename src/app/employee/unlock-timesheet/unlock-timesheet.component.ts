@@ -31,8 +31,8 @@ export class UnlockTimesheetComponent implements OnInit {
     this.finalreason=this.reasontext;
     console.log(this.finalreason);
     
-    this.timesheetRequest.empid=6;
-    this.timesheetRequest.managerid = 5;
+    this.timesheetRequest.empid=Number(localStorage.getItem('empid'));
+    this.timesheetRequest.managerid=this.prjmngrId;
     this.timesheetRequest.reason=this.finalreason;
     this.timesheetRequest.status=1;
     

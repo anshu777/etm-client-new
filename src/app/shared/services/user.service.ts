@@ -6,7 +6,6 @@ import 'rxjs/add/operator/map';
 import { User } from './user.model';
 import { Router } from '@angular/router';
 
-
 @Injectable()
 export class UserService {
     readonly rootUrl = 'http://localhost:8080/etmapi';
@@ -78,5 +77,16 @@ export class UserService {
     logout() {
         localStorage.removeItem('userToken');
         this.router.navigate(['login']);
+    }
+
+    getDashboardURL(roleName: string) {
+        if (roleName === 'manager') {
+            return 'pm/dashboard';
+        } else if (roleName === 'hr' || roleName === 'admin') {
+            return 'hr/dashboard';
+        } else if (roleName === 'normal') {
+            return 'emp/dashboard';
+        }
+
     }
 }

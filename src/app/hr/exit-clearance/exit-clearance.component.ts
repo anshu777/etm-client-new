@@ -19,6 +19,7 @@ export class ExitClearanceComponent implements OnInit {
 
 
   ngOnInit() {
+    this.notificationService.error("Enter a valid Employee Id")
   }
 
   SaveExitClearance() {
@@ -64,11 +65,14 @@ export class ExitClearanceComponent implements OnInit {
               this.employee = new Employee();
             }
             else {
-              console.log(data);
+              
+              this.notificationService.success("hip hip hut",true);
+              
               this.mapEmpData(data);
             }
           }
         )
+        
 
 
     }
